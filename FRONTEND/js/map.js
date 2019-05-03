@@ -19,24 +19,21 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 
 
-
 let popup = L.popup();
-// let counter = 0;
-for (let i = 0; i<=4; i++) {
+let position = [[],[],[],[]];
     function onMapClick(e) {
+
         popup
             .setLatLng(e.latlng)
             .setContent("You clicked the map at " + e.latlng.toString())
             .openOn(mymap);
-        // L.polygon([
-        //     [51.509, -0.08],
-        //     [51.503, -0.06],
-        //     [51.51, -0.047],
-        //     [e.latlng.lat,e.latlng.lng]
-        // ]).addTo(mymap).bindPopup("I am a polygon.");
+        L.polygon(position).addTo(mymap).bindPopup("I am a polygon.");
 
         console.log(e.latlng.lat, e.latlng.lng);
     }
 
     mymap.on('click', onMapClick);
-}
+
+
+
+
