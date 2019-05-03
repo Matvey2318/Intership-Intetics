@@ -4,7 +4,8 @@ from . import views
 
 urlpatterns = [
     #path('', views.get_date, name='get_date'),
-    path('', views.Authorization.start(request), name='index'),
-    path('form', views.Authorization.start_second, name='index_two'),
+    path('', views.StartPage.start, name='index'),
+    path('form', views.start_second, name='index_two'),
+    path('download', views.download, name='download'),
     #path('home', views.get_date, name='home'),
 ]
