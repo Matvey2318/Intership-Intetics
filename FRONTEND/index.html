@@ -8,6 +8,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="stylesheet" href="css/css.css"/>
+
     <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
@@ -21,6 +23,24 @@
 
 </head>
 <body>
+<div id="date">
+    Start Date:
+    <input type="date" id="start"  >
+</div>
+<div>
+    Finish Date:
+    <input type="date" id="finish" >
+</div>
+<div class="cloud">
+    <form>
+        <label>
+            <input type="range" min="0" max="100" value="0">
+            <input type="number" readonly >
+        </label>
+    </form>
+</div>
+
+
 
 
 

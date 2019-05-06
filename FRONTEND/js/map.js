@@ -8,8 +8,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
     id: 'mapbox.streets'
 }).addTo(mymap);
 
-// L.marker([51.5, -0.09]).addTo(mymap)
-//     .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
 
 // L.circle([51.508, -0.11], 500, {
 //     color: 'red',
@@ -18,21 +16,45 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 // }).addTo(mymap).bindPopup("I am a circle.");
 
 
+const inputRange = document.forms[0].elements[0];
+const inputNumb = document.forms[0].elements[1];
 
+inputNumb.onchange = function(e){
+    inputRange.value = inputNumb.value;
+
+};
+inputRange.onchange = function(e){
+    inputNumb.value = inputRange.value;
+
+};
+
+
+let dateDefaultStart=new Date();
+let dateDefaultFinish = new Date();
+dateDefaultStart.setDate(dateDefaultStart.getDate()-3);
+document.getElementById('finish').valueAsDate = dateDefaultFinish;
+document.getElementById('start').valueAsDate = dateDefaultStart;
 let popup = L.popup();
-let position = [[],[],[],[]];
-    function onMapClick(e) {
+let position = [];
 
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(mymap);
+
+function onMapClick(e) {
+    if (position.length<4){
+        position.push([e.latlng.lat,e.latlng.lng]);
+        L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap).openPopup();
+    }
+    popup
+        .setLatLng(e.latlng)
+        .setContent( e.latlng.toString())
+        .openOn(mymap);
+    if (position.length===4 || position.length !== 3) {
         L.polygon(position).addTo(mymap).bindPopup("I am a polygon.");
-
-        console.log(e.latlng.lat, e.latlng.lng);
     }
 
-    mymap.on('click', onMapClick);
+    console.log(e.latlng.lat, e.latlng.lng);
+}
+
+mymap.on('click', onMapClick);
 
 
 
