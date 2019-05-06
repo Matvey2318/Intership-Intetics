@@ -1,37 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from account import Authorization
 from sentinelsat import SentinelAPI, read_geojson, geojson_to_wkt
 from django.shortcuts import render, render_to_response
-from django.shortcuts import redirect
-import datetime
-from django.utils import timezone
+import json
 from collections import OrderedDict
 from django.http import HttpResponse, HttpRequest
-from django import forms
 import urllib.request
-from download import check_count, downloader
-
-
-class Authorization:
-    """
-    includes:
-    - getting login and psswd
-    - api
-    """
-    Login_data = dict()
-    api = None
-
-    def login(self, request):
-        if 'login' in request.GET:
-            self.Login_data['login'] = request.GET['login']
-        else:
-            return HttpResponse('No login in your form')
-        if 'password' in request.GET:
-            self.Login_data['password'] = request.GET['password']
-            return
-        else:
-            return HttpResponse('No password in your form')
-
 
 class DataProcessing:
     Data = dict()
@@ -61,7 +34,6 @@ class StartPage:
         return render(
             None,
             'index.html'
-
         )
 
 
@@ -86,7 +58,37 @@ def get_all_data(request): #geojson_obj):
     return user_data.Data
 
 
+def check_count(request, *geojson_obj):  # need to add conditional with geojson and footprint
+    """
+    Counts urls by filters
+
+    :param request:
+    JSON object with filters
+    :return:
+    amount of urls
+    """
+    user_query = get_all_data(request)
+    user_data.urls.clear()
+    if user_login.api:
+        products = user_login.api.query(**user_query)
+        product_ids = list(products)
+        for id in product_ids:
+            user_data.urls.append(user_login.api.get_product_odatjhea(id)['url'])
+        user_data.urls = set(user_data.urls)
+        user_data.urls = list(user_data.urls)
+    else:
+        HttpResponse('False')
+    return len(user_data.urls)   # need to return response
 
 
-
-
+def confirmation(request):
+    if request.GET:
+        return render(
+            request,
+            'download.html',
+            context={'urls': user_data.urls}
+        )
+    else:
+        return render_no_response(
+            'test_form.html'
+        )
