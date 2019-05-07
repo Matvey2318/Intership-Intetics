@@ -15,7 +15,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 //     fillOpacity: 0.5
 // }).addTo(mymap).bindPopup("I am a circle.");
 
-
+const button = document.getElementById('button');
 const inputRange = document.forms[0].elements[0];
 const inputNumb = document.forms[0].elements[1];
 
@@ -33,6 +33,7 @@ let dateDefaultStart=new Date();
 let dateDefaultFinish = new Date();
 dateDefaultStart.setDate(dateDefaultStart.getDate()-3);
 document.getElementById('finish').valueAsDate = dateDefaultFinish;
+document.getElementById('finish').maxAsDate = dateDefaultFinish;
 document.getElementById('start').valueAsDate = dateDefaultStart;
 let popup = L.popup();
 let position = [];
@@ -42,6 +43,8 @@ function onMapClick(e) {
     if (position.length<4){
         position.push([e.latlng.lat,e.latlng.lng]);
         L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap).openPopup();
+    } else {
+        return
     }
     popup
         .setLatLng(e.latlng)
@@ -51,10 +54,16 @@ function onMapClick(e) {
         L.polygon(position).addTo(mymap).bindPopup("I am a polygon.");
     }
 
+    button.onclick = function(e){
+        position=[];
+        console.log('Done');
+    };
     console.log(e.latlng.lat, e.latlng.lng);
 }
 
-mymap.on('click', onMapClick);
+    mymap.on('click', onMapClick);
+
+
 
 
 
