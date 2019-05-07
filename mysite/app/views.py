@@ -38,7 +38,7 @@ class DataProcessing:
     urls = []
 
 
-user_login = Authorization()  #user's instance of LogIn
+user_login = Authorization()  # user's instance of LogIn
 user_data = DataProcessing()
 
 
@@ -78,7 +78,7 @@ def entrance(request):  #runs on index.html
     )
 
 
-def get_all_data(request): #geojson_obj):
+def get_all_data(request):  # geojson_obj):
     if request.is_ajax():
         if request.method == 'GET':
             json_data = json.load(request.GET)  # loads
