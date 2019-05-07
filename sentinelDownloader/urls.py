@@ -16,10 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from downloader import StartPage
+from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', StartPage.start, name='index'),
+
     # path('', views.get_date, name='get_date'),
     # path('form', views.login, name='index_two'),
     # path('download', views.download, name='download'),
