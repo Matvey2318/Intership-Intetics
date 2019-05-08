@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from downloader import StartPage
+from downloader import entrance
+from django.views.generic import TemplateView
+from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', StartPage.start, name='index'),
+    path('app/', TemplateView.as_view(template_name="signin.html"), name='signin'),
+    path('app/home', entrance, name='home'),
+
     # path('', views.get_date, name='get_date'),
     # path('form', views.login, name='index_two'),
     # path('download', views.download, name='download'),

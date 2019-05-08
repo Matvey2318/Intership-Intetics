@@ -5,6 +5,8 @@ import json
 from collections import OrderedDict
 from django.http import HttpResponse, HttpRequest
 import urllib.request
+import urllib.error
+
 
 class DataProcessing:
     Data = dict()
@@ -29,15 +31,7 @@ def connect(request):
     return
 
 
-class StartPage:
-    def start(self):  # need to use TemplateView
-        return render(
-            None,
-            'index.html'
-        )
-
-
-def entrance(request):  #runs on index.html
+def entrance(request):  # runs on index.html
     connect(request)
 
     """
@@ -45,7 +39,7 @@ def entrance(request):  #runs on index.html
     """
     return render(
         request,
-        'test_form.html',
+        'index.html',
         context={}
     )
 
@@ -89,6 +83,6 @@ def confirmation(request):
             context={'urls': user_data.urls}
         )
     else:
-        return render_no_response(
-            'test_form.html'
+        return render_to_response(
+            'index.html'
         )
