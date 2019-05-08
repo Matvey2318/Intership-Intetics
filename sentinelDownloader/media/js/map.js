@@ -1,61 +1,90 @@
-let mymap = L.map('mapid').setView([51.505, -0.09], 13);
+// let ref = document.getElementById('map').innerHTML;
 
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox.streets'
-}).addTo(mymap);
-
-
-// L.circle([51.508, -0.11], 500, {
-//     color: 'red',
-//     fillColor: '#f03',
-//     fillOpacity: 0.5
-// }).addTo(mymap).bindPopup("I am a circle.");
-
-
+const button = document.getElementById('button');
 const inputRange = document.forms[0].elements[0];
 const inputNumb = document.forms[0].elements[1];
 
-inputNumb.onchange = function(e){
+inputNumb.onchange = function (e) {
     inputRange.value = inputNumb.value;
 
 };
-inputRange.onchange = function(e){
+inputRange.onchange = function (e) {
     inputNumb.value = inputRange.value;
 
 };
 
 
-let dateDefaultStart=new Date();
+let dateDefaultStart = new Date();
 let dateDefaultFinish = new Date();
-dateDefaultStart.setDate(dateDefaultStart.getDate()-3);
+dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
 document.getElementById('finish').valueAsDate = dateDefaultFinish;
+document.getElementById('finish').maxAsDate = dateDefaultFinish;
 document.getElementById('start').valueAsDate = dateDefaultStart;
-let popup = L.popup();
-let position = [];
+
+let center = [51.505, -0.09];
+
+// Create the map
+let map = L.map('map',{drawControl:true}).setView(center, 13);
+
+// Set up the OSM layer
+L.tileLayer(
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+// add a marker in the given location
+L.marker(center).addTo(map);
+
+// Initialise the FeatureGroup to store editable layers
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
+
+var drawPluginOptions = {
+  position: 'topright',
+  draw: {
+    rectangle: {
+      allowIntersection: false, // Restricts shapes to simple polygons
+      drawError: {
+        color: '#e1e100', // Color the shape will turn when intersects
+        message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+      },
+      shapeOptions: {
+        color: '#97009c'
+      }
+    },
+    // disable toolbar item by setting it to false
+    polyline: false,
+    circle: false, // Turns off this drawing tool
+    polygon: false,
+    marker: false,
+    },
+  edit: {
+    featureGroup: editableLayers, //REQUIRED!!
+    remove: false
+  }
+};
+
+// Initialise the draw control and pass it the FeatureGroup of editable layers
+var drawControl = new L.Control.Draw(drawPluginOptions);
+map.addControl(drawControl);
 
 
-function onMapClick(e) {
-    if (position.length<4){
-        position.push([e.latlng.lat,e.latlng.lng]);
-        L.marker([e.latlng.lat, e.latlng.lng]).addTo(mymap).openPopup();
-    }
-    popup
-        .setLatLng(e.latlng)
-        .setContent( e.latlng.toString())
-        .openOn(mymap);
-    if (position.length===4 || position.length !== 3) {
-        L.polygon(position).addTo(mymap).bindPopup("I am a polygon.");
-    }
+var editableLayers = new L.FeatureGroup();
+map.addLayer(editableLayers);
 
-    console.log(e.latlng.lat, e.latlng.lng);
-}
+map.on('draw:created', function(e) {
+  var type = e.layerType,
+    layer = e.layer;
 
-mymap.on('click', onMapClick);
+  if (type === 'marker') {
+    layer.bindPopup('A popup!');
+  }
 
+	editableLayers.clearLayers();
+
+  editableLayers.addLayer(layer);
+});
 
 
 
