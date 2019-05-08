@@ -18,6 +18,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
 <div id="date">
@@ -38,12 +39,10 @@
 </div>
 <div id="map" style="width: 600px; height: 400px;">
 </div>
-<div id="button">
+<div id="reset_map">
     <button style="width: 70px; height: 20px;" >Reset</button>
 </div>
 <script src="{% static "js/map.js" %}"></script>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="{% static "js/map.js" %}"></script>
-  <script src="{% static "js/enotherMap.js" %}"></script>
+<script src="{% static "js/app.js" %}"></script>
 </body>
 </html>
