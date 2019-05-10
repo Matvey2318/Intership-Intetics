@@ -2,7 +2,7 @@
 <html>
 <head>
     {% load static %}
-    <title>Quick Start - Leaflet</title>
+    <title>Quick Start</title>
 
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,10 +29,10 @@
     Finish Date:
     <input type="date" id="finish" min="05.05.2019"  max="07.05.2019" >
 </div>
-<div class="cloud">
+<div>
     <form>
         <label>
-            <input type="range" min="0" max="100" value="0">
+            <input type="range" id="cloud" min="0" max="100" value="0">
             <input type="number" readonly >
         </label>
     </form>
@@ -41,6 +41,9 @@
 </div>
 <div id="reset_map">
     <button style="width: 70px; height: 20px;" >Reset</button>
+</div>
+<div>
+    <input type="submit" id="sub" value="Submit">
 </div>
 <script src="{% static "js/map.js" %}"></script>
 <script src="{% static "js/app.js" %}"></script>
