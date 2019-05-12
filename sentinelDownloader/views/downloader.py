@@ -11,6 +11,7 @@ import urllib.error
 class DataProcessing:
     Data = dict()
     urls = []
+    product_ids = []
 
 
 user_login = Authorization()  #user's instance of LogIn
@@ -31,7 +32,7 @@ def connect(request):
     return
 
 
-def entrance(request):  # runs on index.html
+def entrance(request):  # runs on signin.html
     connect(request)
 
     """
@@ -52,37 +53,47 @@ def get_all_data(request): #geojson_obj):
     return user_data.Data
 
 
-def check_count(request, *geojson_obj):  # need to add conditional with geojson and footprint
+def check_count(request, *geojson_obj):
     """
-    Counts urls by filters
-
+    Counts products by filters
     :param request:
     JSON object with filters
     :return:
     amount of urls
     """
     user_query = get_all_data(request)
-    user_data.urls.clear()
+    user_data.product_ids.clear()
     if user_login.api:
-        products = user_login.api.query(**user_query)
-        product_ids = list(products)
-        for id in product_ids:
-            user_data.urls.append(user_login.api.get_product_odatjhea(id)['url'])
-        user_data.urls = set(user_data.urls)
-        user_data.urls = list(user_data.urls)
+        if geojson_obj:
+            footprint = geojson_to_wkt(read_geojson(geojson_obj))
+            # Artem has to check that request always contains footprint (in JSON) or geojson_obj
+            products = user_login.api.query(footprint, **user_query)
+        else:
+            products = user_login.api.query(**user_query)
+        user_data.product_ids = list(products)
+        user_data.product_ids = set(user_data.product_ids)
+        user_data.product_ids = list(user_data.product_ids)
     else:
         HttpResponse('False')
-    return len(user_data.urls)   # need to return response
+    return HttpResponse(json.dumps(len(user_data.product_ids)), mimetype='application/json')   # ? - not use json, just len
 
 
 def confirmation(request):
+    """
+    Makes a response with filtered data
+    :param request:
+    Boolean (True if action is confirmed)
+    :return:
+    JSON with id and url of each queried product
+    """
+    user_data.urls.clear()
     if request.GET:
-        return render(
-            request,
-            'download.html',
-            context={'urls': user_data.urls}
-        )
+        response_urls = dict()
+        for id in user_data.product_ids:
+            response_urls[id] = user_login.api.get_product_odatjhea(id)['url']
+            user_data.urls.append(response_urls[id])
+        return HttpResponse(json.dumps(response_urls), mimetype='application/json')
     else:
         return render_to_response(
             'index.html'
-        )
+        )  # need response?
