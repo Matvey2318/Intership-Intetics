@@ -27,7 +27,12 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg  navbar-inverse bg-light ">
+  <a class="navbar-brand" href="#">
+    <img src="{% static "images/sentinel.ico" %}" width="30" height="30"  class="d-inline-block align-top" alt="">
+    Sentinel
+  </a>
+</nav>
 <div id="date">
     Start Date:
     <input type="date" id="start"  >
@@ -47,10 +52,10 @@
 <div id="map" style="width: 600px; height: 400px;">
 </div>
 <div id="reset_map">
-    <button style="top: -10px"  >Reset</button>
+    <button style="top: -10px" class="btn btn-warning" >Reset</button>
 </div>
 <div>
-    <input type="submit"  id="sub" value="Submit">
+    <input type="submit" class="btn btn-primary" id="sub" value="Submit">
 </div>
 <script src="{% static "js/map.js" %}"></script>
 <script src="{% static "js/app.js" %}"></script>
