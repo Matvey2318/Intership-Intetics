@@ -45,9 +45,9 @@ date_st.onchange= function (e) {
 
 function dataRecord (){
 
-    dict.start=date_st.value;
-    dict.finish=date_fin.value;
-    dict.cloud=cloud.value;
+    dict.beginposition=date_st.value;
+    dict.endposition=date_fin.value;
+    dict.cloudcoverpercentage=cloud.value;
 
 };
 let sub = document.getElementById('sub');
@@ -58,7 +58,7 @@ sub.onclick=function(e){
 function Request(){
     $.ajax({
   type: "GET",
-  url: 'http://127.0.0.1:8000/app/home/findurls',
+  url: 'home/findurls',
   data: dict,
   success: openDataTable ,
   dataType:"number",

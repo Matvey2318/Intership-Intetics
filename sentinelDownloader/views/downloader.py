@@ -48,8 +48,16 @@ def entrance(request):  # runs on index.html
 def get_all_data(request): #geojson_obj):
     if request.is_ajax():
         if request.method == 'GET':
-            json_data = json.load(request.GET)  # loads
-            user_data.Data = OrderedDict(json_data)
+            print('GOT REQUEST')
+            data = dict()
+            json_data = json.dumps(request.GET)
+            json_data = json.loads(json_data)
+            data['date'] = (json_data['beginposition'].replace('-', ''), json_data['endposition'].replace('-', ''))
+            data['cloudcoverpercentage'] = (0, int(json_data['cloudcoverpercentage']))
+            # data['footprint']='POLYGON ((34.322010 0.401648,36.540989 0.876987,36.884121 -0.747357,34.664474 -1.227940,34.322010 0.401648))'
+            # json_data = json.loads(json_data)
+            user_data.Data = OrderedDict(data)
+            print(user_data.Data)
     return user_data.Data
 
 
@@ -77,19 +85,19 @@ def find_urls(request, *geojson_obj):  # need to add conditional with geojson an
         products = user_login.api.query(**user_query)
         product_ids = list(products)
         for id in product_ids:
-            user_data.urls.append(user_login.api.get_product_odatjhea(id)['url'])
+            user_data.urls.append(user_login.api.get_product_odata(id)['url'])
         user_data.urls = set(user_data.urls)
         user_data.urls = list(user_data.urls)
     else:
         HttpResponse('False')
-    return len(user_data.urls)   # need to return response
+    return HttpResponse(len(user_data.urls))   # need to return response
 
 
 def confirmation(request):
     if request.GET:
         return render(
             request,
-            'download.html',
+            'download.html',  # here will be template with urls
             context={'urls': user_data.urls}
         )
     else:
