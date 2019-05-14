@@ -1,4 +1,4 @@
-from account import Authorization
+from sentinelDownloader.views.account import Authorization
 from sentinelsat import SentinelAPI, read_geojson, geojson_to_wkt
 from django.shortcuts import render, render_to_response
 import json
@@ -11,6 +11,7 @@ import urllib.error
 class DataProcessing:
     Data = dict()
     urls = []
+    geojson_obj = None
 
 
 user_login = Authorization()  #user's instance of LogIn
@@ -52,7 +53,16 @@ def get_all_data(request): #geojson_obj):
     return user_data.Data
 
 
-def check_count(request, *geojson_obj):  # need to add conditional with geojson and footprint
+def geojson_handler(request):
+    print('GOT IN')
+    if request.is_ajax():
+        if request.method == 'POST':
+            user_data.geojson_obj = request.FILES['geojson']
+
+    return HttpResponse('OK')
+
+
+def find_urls(request, *geojson_obj):  # need to add conditional with geojson and footprint
     """
     Counts urls by filters
 

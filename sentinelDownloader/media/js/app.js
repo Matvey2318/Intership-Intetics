@@ -3,10 +3,29 @@ $('#reset_map').click(function(){
     mapModel.resetMap();
 });
 
+$('#geojson').change(function(){
+    data = new FormData($('#geojson').get(0)); // .files
+});
 
+$('#get_geo').click(function(){
+    console.log('GEO');
+    $("#get_geo").prop("disabled", true);
 
+    $.ajax({
+        url: 'home/get_geo',
+        type: 'POST',
 
-
+        cache: false,
+        //dataType: 'json',
+        processData: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        data: data, // stringify
+        success: function (respond) {
+            console.log('SUCCESS');
+        }
+        })
+});
 
 let dict = {};
 let date_st = document.getElementById('start');
@@ -60,4 +79,3 @@ inputNumb.onchange = function (e) {
     inputRange.value = inputNumb.value;
 
 };
-
