@@ -7,6 +7,7 @@ $('#reset_map').click(function(){
 
 
 
+
 let dict = {};
 let date_st = document.getElementById('start');
 let date_fin = document.getElementById('finish');
@@ -46,5 +47,17 @@ function Request(){
 }
 function openDataTable(){
     myWin = open('http://127.0.0.1:8000/data-table/')
+};
+
+var inputRange = document.getElementById('cloud');
+var inputNumb = document.getElementById('num');
+inputRange.oninput = function (e) {
+    inputNumb.value = inputRange.value;
+
+};
+
+inputNumb.onchange = function (e) {
+    inputRange.value = inputNumb.value;
+
 };
 

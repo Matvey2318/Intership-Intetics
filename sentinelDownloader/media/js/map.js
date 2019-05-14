@@ -1,11 +1,5 @@
-var inputRange = document.forms[0].elements[0];
-var inputNumb = document.forms[0].elements[1];
-inputNumb.onchange = function (e) {
-    inputRange.value = inputNumb.value;
-};
-inputRange.onchange = function (e) {
-    inputNumb.value = inputRange.value;
-};
+
+
 var dateDefaultStart = new Date();
 var dateDefaultFinish = new Date();
 dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
