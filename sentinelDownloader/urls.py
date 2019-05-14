@@ -22,6 +22,7 @@ from django.conf.urls import include, url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', TemplateView.as_view(template_name="signin.html"), name='signin'),
+    path('data-table/', TemplateView.as_view(template_name="data_table.html"), name='data_table'),
     path('app/home', entrance, name='home'),
 
     # path('', views.get_date, name='get_date'),
