@@ -56,13 +56,20 @@
                                      value="0"><b>100%</b>
                 </label>
                 <label>
-                    <input type="number" id="num" class="input-group-text"readonly >
+                    <input type="number" id="num" class="input-group-text" readonly>
                 </label>
             </form>
+        </div>
+        GeoJSON
+        <div class="custom-file geo-submit">
+            <input type="file" class="custom-file-input" id="customFile" accept=".txt,image/*" name="geojson">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+            <input type="submit" class="btn btn-primary" id="get_geo" value="Sent">
         </div>
         <div id="submit">
             <input type="submit" class="btn btn-primary" id="sub" value="Submit">
         </div>
+
     </div>
     <div class="map">
         <div class="all-map">
@@ -71,10 +78,6 @@
             <div id="reset_map">
                 <button style="top: -10px" class="btn btn-warning">Reset</button>
             </div>
-          <div>
-                <input type="file" accept=".txt,image/*" name="geojson">
-                <input type="submit" id="get_geo">
-          </div>
         </div>
     </div>
 </div>
