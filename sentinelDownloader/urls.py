@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from downloader import entrance
+from downloader import entrance, find_urls
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
@@ -25,6 +25,7 @@ urlpatterns = [
     path('app/', TemplateView.as_view(template_name="signin.html"), name='signin'),
     path('data-table/', TemplateView.as_view(template_name="data_table.html"), name='data_table'),
     path('app/home', entrance, name='home'),
+    path('app/home/findurls', find_urls, name='home'),
     path('', RedirectView.as_view(url='app/'))
     # path('form', views.login, name='index_two'),
     # path('download', views.download, name='download'),
