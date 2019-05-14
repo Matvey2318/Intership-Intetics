@@ -20,7 +20,7 @@ $('#get_geo').click(function(){
         processData: false,
         contentType: false,
         enctype: 'multipart/form-data',
-        data: data,
+        data: data, // stringify
         success: function (respond) {
             console.log('SUCCESS')
         }
