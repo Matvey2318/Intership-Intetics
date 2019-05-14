@@ -18,14 +18,14 @@ from django.urls import path
 from downloader import entrance
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('app/', TemplateView.as_view(template_name="signin.html"), name='signin'),
     path('data-table/', TemplateView.as_view(template_name="data_table.html"), name='data_table'),
     path('app/home', entrance, name='home'),
-
-    # path('', views.get_date, name='get_date'),
+    path('', RedirectView.as_view(url='app/'))
     # path('form', views.login, name='index_two'),
     # path('download', views.download, name='download'),
     # path('home', views.get_date, name='home'),
