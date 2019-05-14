@@ -1,9 +1,27 @@
-#mapid {
-    height: 180px;
-    right: -740px;
-    top : -30px;
+.all-map {
+float:right;
+top: 0px;
 }
-#date{
-    top : 10px;
+.date{
+    display : flex;
+
+
 }
+.footer{
+    background-color: #222222;
+    width: 1366px;
+    height: 133px;
+    color: #0078A8;
+    margin-top: 30px;
+}
+#cld{
+    display: flex;
+    width:250px;
+}
+.main{
+    display:flex;
+    Justify-content: space-between;
+}
+
+
 
