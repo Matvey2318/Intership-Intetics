@@ -1,11 +1,11 @@
-
-
 var dateDefaultStart = new Date();
 var dateDefaultFinish = new Date();
 dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
 document.getElementById('finish').valueAsDate = dateDefaultFinish;
 document.getElementById('finish').maxAsDate = dateDefaultFinish;
 document.getElementById('start').valueAsDate = dateDefaultStart;
+
+var bounds = this.map
 
 var MapModel = class MapModel {
         constructor(center){
