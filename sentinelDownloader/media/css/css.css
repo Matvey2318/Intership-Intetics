@@ -9,7 +9,7 @@ top: 0px;
 }
 .footer{
     background-color: #222222;
-    width: 1366px;
+    width: 100%;
     height: 133px;
     color: #0078A8;
     margin-top: 30px;
@@ -27,10 +27,13 @@ top: 0px;
     display: block;
 }
 .geo-submit{
-    padding: 20px;
+    padding: 10px;
 }
 
+#submit{
+    padding: 60px;
 
+}
 
 
 
