@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from downloader import entrance, find_urls
+from sentinelDownloader.views.downloader import entrance, find_urls
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView

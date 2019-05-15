@@ -61,7 +61,10 @@ function Request(){
   url: 'home/findurls',
   data: dict,
   success: openDataTable ,
-  dataType:"number",
+  dataType:"json",
+  success: function(data) {
+  console.log(data.urls);
+  }
 });
 }
 function openDataTable(){

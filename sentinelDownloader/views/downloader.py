@@ -81,16 +81,19 @@ def find_urls(request, *geojson_obj):  # need to add conditional with geojson an
     """
     user_query = get_all_data(request)
     user_data.urls.clear()
+    footprint = 'POLYGON((34.322010 0.401648,36.540989 0.876987,36.884121 -0.747357,34.664474 -1.227940,34.322010 0.401648))'
     if user_login.api:
-        products = user_login.api.query(**user_query)
+        products = user_login.api.query(footprint, **user_query)
         product_ids = list(products)
         for id in product_ids:
             user_data.urls.append(user_login.api.get_product_odata(id)['url'])
         user_data.urls = set(user_data.urls)
         user_data.urls = list(user_data.urls)
+        print('OK')
+        # count = str(len(user_data.urls))
     else:
         HttpResponse('False')
-    return HttpResponse(len(user_data.urls))   # need to return response
+    return HttpResponse(json.dumps({'urls': user_data.urls}), content_type="application/json")   # need to return response
 
 
 def confirmation(request):
