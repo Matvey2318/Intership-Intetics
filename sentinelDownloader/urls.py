@@ -26,8 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('django.contrib.auth.urls')),
     path('', TemplateView.as_view(template_name='index.html'), name='home'),
-
-    # path('app/home/get_geo', geojson_handler, name='geojson_handler'),
+    path('app/home/get_geo', geojson_handler, name='geojson_handler'),
     path('data-table/', TemplateView.as_view(template_name="data_table.html"), name='data_table'),
     path('findurls', find_urls, name='home'),
 ]
