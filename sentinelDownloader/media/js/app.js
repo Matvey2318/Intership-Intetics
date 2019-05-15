@@ -58,7 +58,7 @@ sub.onclick=function(e){
 function Request(){
     $.ajax({
   type: "GET",
-  url: 'home/findurls',
+  url: 'findurls',
   data: dict,
   success: openDataTable ,
   dataType:"number",
