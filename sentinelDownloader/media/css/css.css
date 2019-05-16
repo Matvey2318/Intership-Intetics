@@ -23,5 +23,18 @@ top: 0px;
     Justify-content: space-between;
 }
 
+.inputs{
+    display: block;
+}
+.geo-submit{
+    padding: 10px;
+}
 
+#submit{
+    padding: 60px;
+
+}
+.table-data{
+    display: none;
+}
 
