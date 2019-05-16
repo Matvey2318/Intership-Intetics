@@ -9,7 +9,7 @@ top: 0px;
 }
 .footer{
     background-color: #222222;
-    width: 1366px;
+    width: 100%;
     height: 133px;
     color: #0078A8;
     margin-top: 30px;
@@ -43,7 +43,8 @@ top: 0px;
 
 .pop-outer{
             background-color: rgba(0,0,0,0.5);
-            position: fixed;
+            position: absolute;
+            z-index: 10 ;
             top: 0;
             left : 0;
             width : 100%;
@@ -58,3 +59,15 @@ top: 0px;
             margin-left: 330px;
 
         }
+.map{
+    z-index: 20;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.map-disabled{
+    opacity: 0;
+}

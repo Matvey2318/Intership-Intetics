@@ -83,13 +83,13 @@ inputNumb.onchange = function (e) {
     inputRange.value = inputNumb.value;
 
 };
-// Modal data-table
+// Modal data-table room for improvement
 $(document).ready(function () {
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
-        $('.map').fadeOut('slow');
-        $('.geo-submit').fadeOut('slow');
-        $('.footer').fadeOut('slow');
+       $('.map').fadeOut('slow');
+        //$('.geo-submit').fadeOut('slow');
+        //$('.footer').fadeOut('slow');
     });
 
     $('.close').click(function () {
@@ -100,17 +100,6 @@ $(document).ready(function () {
     })
 });
 
-$(document).ready(function () {
-    $('.map').click(function () {
-        $('.geo-submit').fadeOut('slow');
-    });
-});
-
-$(document).ready(function () {
-    $('.geo-submit').click(function () {
-        $('.map').fadeOut('slow');
-    })
-});
 // fixed date for finish
 $(function(){
     let dtToday = new Date();
@@ -142,5 +131,33 @@ $(function(){
     let maxDate = year + '-' + month + '-' + day;
 
     $('#start').attr('max', maxDate);
+});
+//disable submit
+$(document).ready(function () {
+    $('#map').click(function () {
+        $(".geo-submit").addClass("disabled");
+    });
+});
+//disable map
+$(document).ready(function () {
+    $('.geo-submit').change(function () {
+        $('.map').addClass("disabled");
+    })
+});
+
+
+// button cancel-file
+$(document).ready(function () {
+    $('.cancel-file').click(function () {
+        $('.map').removeClass("disabled");
+
+    })
+});
+
+// button cancel-map
+$(document).ready(function () {
+    $('.cancel-map').click(function () {
+        $('.geo-submit').removeClass("disabled");
+    })
 });
 
