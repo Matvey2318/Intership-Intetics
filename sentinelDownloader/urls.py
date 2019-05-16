@@ -15,18 +15,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from downloader import entrance
+from sentinelDownloader.views.downloader import entrance, find_urls
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('app/', TemplateView.as_view(template_name="signin.html"), name='signin'),
+    path('main/', include('django.contrib.auth.urls')),
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('app/home/get_geo', geojson_handler, name='geojson_handler'),
     path('data-table/', TemplateView.as_view(template_name="data_table.html"), name='data_table'),
-    path('app/home', entrance, name='home'),
-    path('', RedirectView.as_view(url='app/'))
-    # path('form', views.login, name='index_two'),
-    # path('download', views.download, name='download'),
-    # path('home', views.get_date, name='home'),
+    path('findurls', find_urls, name='home'),
 ]
+print(urlpatterns)
