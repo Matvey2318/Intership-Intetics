@@ -10,7 +10,7 @@ $('#get_geo').click(function(){
     var $input = $('input[name="geojson"');
     fd.append('polygon_data', $input.prop('files')[0]);
     $.ajax({
-        url: 'home/get_geo',
+        url: 'get_geo',
         type: 'POST',
         cache: false,
         processData: false,
