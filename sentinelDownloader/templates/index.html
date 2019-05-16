@@ -34,7 +34,9 @@
 
 </head>
 <body>
-
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+<p><a href="{% url 'logout' %}">logout</a></p>
 <nav class="navbar navbar-expand-lg  navbar-inverse bg-dark ">
     <a class="navbar-brand" href="#">
         <img src="{% static "images/sentinel.ico" %}" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -68,7 +70,7 @@
         </div>
         GeoJSON
         <div class="custom-file geo-submit">
-            <input type="file" class="custom-file-input" id="customFile" accept=".geojson" name="geojson">
+            <input type="file" class="custom-file-input" id="customFile" accept=".geojson"" name="geojson">
             <label class="custom-file-label" for="customFile">Choose file</label>
             <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
         </div>
@@ -163,6 +165,10 @@
 </footer>
 <script src="{% static "js/map.js" %}"></script>
 <script src="{% static "js/app.js" %}"></script>
- <script src="{% static "js/d_t.js" %}"></script>
+<script src="{% static "js/d_t.js" %}"></script>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
 </body>
 </html>
