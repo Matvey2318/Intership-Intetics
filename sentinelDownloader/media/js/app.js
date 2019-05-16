@@ -63,13 +63,37 @@ function Request() {
   dataType:"json",
   success: function(data) {
   console.log(data.urls);
+      let str;
+let table = document.getElementById('date');
+for (item of data.urls){
+    let dataTb= document.createElement('tr');
+    str = `Row${item}`;
+dataTb.innerHTML = `
+
+                <td>${str} Data 1</td>
+                <td>${item}</td>
+           `;
+table.appendChild(dataTb);
+}
   }
 });
 
 }
 
-function openDataTable() {
-    myWin = open('http://127.0.0.1:8000/data-table/')
+function openDataTable(arr) {
+    let str;
+let table = document.getElementById('date');
+for (item of arr){
+    let dataTb= document.createElement('tr');
+    str = `Row${item}`;
+dataTb.innerHTML = `
+
+                <td>${str} Data 1</td>
+                <td>${item}</td>
+           `;
+table.appendChild(dataTb);
+}
+    //myWin = open('http://127.0.0.1:8000/data-table/')
 };
 //
 var inputRange = document.getElementById('cloud');

@@ -5,6 +5,7 @@ $(document).ready(function() {
 function fillingDataTable(){
 
 }
+
 let str;
 let dataTb= document.createElement('tr');
 let table = document.getElementById('date');
@@ -15,8 +16,9 @@ for (item of arr){
 dataTb.innerHTML = `
 
                 <td>${str} Data 1</td>
-                <td>${str} Data 2</td>
-                <td>etc</td>
+                <td>${item}</td>
            `;
 table.appendChild(dataTb);
 }
+
+
