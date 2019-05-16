@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+<<<<<<< SI-#-Hide-GeoJSON-or-map-if-use-one-of-them
+from sentinelDownloader.views.downloader import entrance, find_urls, geojson_handler
+=======
 from sentinelDownloader.views.downloader import find_urls, geojson_handler
+>>>>>>> master
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
 from django.views.generic.base import RedirectView
