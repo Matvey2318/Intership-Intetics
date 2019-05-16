@@ -108,5 +108,36 @@ $(document).ready(function () {
         $('.map').fadeOut('slow');
     })
 });
+// fixed date for finish
+$(function(){
+    let dtToday = new Date();
 
+    let month = dtToday.getMonth() + 1;
+    let day = dtToday.getDate();
+    let year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    let maxDate = year + '-' + month + '-' + day;
+
+    $('#finish').attr('max', maxDate);
+});
+//fixed date for start
+$(function(){
+    let dtToday = new Date();
+
+    let month = dtToday.getMonth() + 1;
+    let day = dtToday.getDate() - 3;
+    let year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    let maxDate = year + '-' + month + '-' + day;
+
+    $('#start').attr('max', maxDate);
+});
 
