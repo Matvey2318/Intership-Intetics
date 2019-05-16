@@ -79,3 +79,19 @@ inputNumb.onchange = function (e) {
     inputRange.value = inputNumb.value;
 
 };
+
+ $(document).ready(function(){
+            $('#sub').click(function () {
+                $('.pop-outer').fadeIn('slow');
+                $('.map').fadeOut('slow');
+                $('.geo-submit').fadeOut('slow');
+                $('.footer').fadeOut('slow');
+            });
+
+            $('.close').click(function () {
+                $('.pop-outer').fadeOut('slow');
+                $('.map').fadeIn('slow');
+                $('.geo-submit').fadeIn('slow');
+                $('.footer').fadeIn('slow');
+            })
+        });
