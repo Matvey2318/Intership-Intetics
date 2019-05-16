@@ -1,64 +1,174 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {% load static %}
+    <title>Quick Start</title>
 
-    <title>Quick Start - Leaflet</title>
-
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="../sentinelDownloader/media/css/css.css"/>
-    <link rel="stylesheet" href="../sentinelDownloader/media/css/draw.css"/>
-
-    <link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
-
+    <link rel="stylesheet" href="{% static "css/css.css" %}"/>
+    <link rel="stylesheet" href="{% static "css/draw.css" %}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "images/sentinel.ico" %}"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
           integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
           crossorigin=""/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
             integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
             crossorigin=""></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
 
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+     <link rel="stylesheet" href="{% static "css/d_t.css" %}"/>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "images/sentinel.ico" %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 </head>
 <body>
-<div id="date">
-    Start Date:
-    <input type="date" id="start"  >
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+<p><a href="{% url 'logout' %}">logout</a></p>
+<nav class="navbar navbar-expand-lg  navbar-inverse bg-dark ">
+    <a class="navbar-brand" href="#">
+        <img src="{% static "images/sentinel.ico" %}" width="30" height="30" class="d-inline-block align-top" alt="">
+        Sentinel
+    </a>
+</nav>
+<div class="main">
+    <div class="inputs">
+        <div class="date">
+            <div id="date-start">
+                Start Date:
+                <input type="date" id="start">
+            </div>
+            <div id="date-finish">
+                Finish Date:
+                <input type="date" id="finish" min="05.05.2019" max="07.05.2019">
+            </div>
+        </div>
+
+        <div class="scroll-cloud">
+            Cloud
+            <form>
+                <label id="cld">
+                    <b>0%</b> <input type="range" class="custom-range " id="cloud" min="0" max="100"
+                                     value="0"><b>100%</b>
+                </label>
+                <label>
+                    <input type="number" id="num" class="input-group-text" readonly>
+                </label>
+            </form>
+        </div>
+        GeoJSON
+        <div class="custom-file geo-submit">
+            <input type="file" class="custom-file-input" id="customFile" accept=".geojson"" name="geojson">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+            <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
+        </div>
+        <div id="submit">
+            <input type="submit" class="btn btn-primary" id="sub" value="Submit">
+        </div>
+
+    </div>
+    <div class="map">
+        <div class="all-map">
+            <div id="map" style="width: 600px; height: 400px;">
+            </div>
+            <div id="reset_map">
+                <button style="top: -10px" class="btn btn-warning">Reset</button>
+            </div>
+
+        </div>
+    </div>
 </div>
-<div>
-    Finish Date:
-    <input type="date" id="finish" min="05.05.2019"  max="07.05.2019" >
+
+   <div style="display: none;" class="pop-outer">
+    <div class="pop-inner">
+        <button class="close btn btn-danger">X</button>
+        <table id="table_id">
+            <thead>
+            <tr>
+                <th>Links</th>
+                <th>ID</th>
+                <th>etc</th>
+            </tr>
+            </thead>
+            <tbody id="date">
+            <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+                <td>etc</td>
+            </tr>
+            <tr>
+                <td>Row 2 Data 1</td>
+                <td>Row 2 Data 2</td>
+                <td>etc</td>
+            </tr>
+            <tr>
+                <td>Row 3 Data 1</td>
+                <td>Row 3 Data 2</td>
+                <td>etc</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
-<div class="cloud">
-    <form>
-        <label>
-            <input type="range" min="0" max="100" value="0">
-            <input type="number" readonly >
-        </label>
-    </form>
-</div>
 
+<footer id="footer" class="footer  ">
 
+    <!-- Footer Links -->
+    <div class="container-fluid text-center text-md-left">
 
+        <!-- Grid row -->
+        <div class="row">
 
+            <!-- Grid column -->
+            <div class="col-md-6 mt-md-0 mt-3">
 
+                <!-- Content -->
+                <h5 class="text-uppercase">About Sentinel</h5>
+                <p>Here you can use rows and columns to organize your footer content.</p>
 
-<div id="map" style="width: 600px; height: 400px;">
-</div>
-<div id="button">
-    <button style="width: 70px; height: 20px;" >Reset</button>
-</div>
+            </div>
+            <!-- Grid column -->
 
+            <hr class="clearfix w-100 d-md-none pb-3">
 
+            <!-- Grid column -->
+            <div class="col-md-3 mb-md-0 mb-3">
 
+                <!-- Links -->
+                <h5 class="text-uppercase">Links</h5>
 
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                </ul>
 
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="../sentinelDownloader/media/js/map.js"></script>
-<script src="../sentinelDownloader/media/js/enotherMap.js"></script>
+            </div>
+        </div>
+    </div>
+
+</footer>
+<script src="{% static "js/map.js" %}"></script>
+<script src="{% static "js/app.js" %}"></script>
+<script src="{% static "js/d_t.js" %}"></script>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
 </body>
 </html>

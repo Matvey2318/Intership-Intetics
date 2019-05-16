@@ -1,78 +1,146 @@
-// center of the map
-let center = [-33.8650, 151.2094];
-
-// Create the map
-let map = L.map('map').setView(center, 6);
-
-// Set up the OSM layer
-L.tileLayer(
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Data © <a href="http://osm.org/copyright">OpenStreetMap</a>',
-        maxZoom: 18
-    }).addTo(map);
-
-// add a marker in the given location
-L.marker(center).addTo(map);
-
-// Initialise the FeatureGroup to store editable layers
-let editableLayers = new L.FeatureGroup();
-map.addLayer(editableLayers);
-
-let drawPluginOptions = {
-    position: 'topright',
-    draw: {
-        polygon: {
-            allowIntersection: false, // Restricts shapes to simple polygons
-            drawError: {
-                color: '#e1e100', // Color the shape will turn when intersects
-                message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-            },
-            shapeOptions: {
-                color: '#97009c'
-            }
-        },
-        // disable toolbar item by setting it to false
-        polyline: false,
-        circle: false, // Turns off this drawing tool
-        rectangle: false,
-        marker: false,
-    },
-    edit: {
-        featureGroup: editableLayers, //REQUIRED!!
-        remove: false
-    }
-};
-
-// Initialise the draw control and pass it the FeatureGroup of editable layers
-let drawControl = new L.Control.Draw(drawPluginOptions);
-map.addControl(drawControl);
-
-map.on('draw:created', function(e) {
-    let type = e.layerType,
-        layer = e.layer;
-
-    if (type === 'marker') {
-        layer.bindPopup('A popup!');
-    }
-
-    editableLayers.addLayer(layer);
+var mapModel = new MapModel([51.505, -0.09]);
+$('#reset_map').click(function () {
+    mapModel.resetMap();
 });
 
-// function onMapClick(e) {
-//     alert("You clicked the map at " + e.latlng);
+
+$('#get_geo').click(function(){
+    console.log('GEO');
+    $("#get_geo").prop("disabled", true);
+    var fd = new FormData;
+    var $input = $('input[name="geojson"');
+    fd.append('polygon_data', $input.prop('files')[0]);
+    $.ajax({
+        url: 'home/get_geo',
+        type: 'POST',
+        cache: false,
+        processData: false,
+        contentType: false,
+        enctype: 'multipart/form-data',
+        data: fd,
+        success: function (respond) {
+            console.log('SUCCESS');
+        }
+
+        });
+});
+
+let dict = {};
+let date_st = document.getElementById('start');
+let date_fin = document.getElementById('finish');
+let cloud = document.getElementById('cloud');
+cloud.onchange = function (e) {
+    dataRecord();
+};
+date_fin.onchange = function (e) {
+    dataRecord();
+};
+
+date_st.onchange = function (e) {
+    dataRecord();
+};
+
+
+function dataRecord() {
+
+    dict.beginposition = date_st.value;
+    dict.endposition = date_fin.value;
+    dict.cloudcoverpercentage = cloud.value;
+
+};
+let sub = document.getElementById('sub');
+sub.onclick = function (e) {
+    Request();
+};
+
+function Request() {
+    $.ajax({
+
+  type: "GET",
+  url: 'findurls',
+  data: dict,
+  success: openDataTable ,
+  dataType:"json",
+  success: function(data) {
+  console.log(data.urls);
+  }
+});
+
+}
+
+function openDataTable() {
+    myWin = open('http://127.0.0.1:8000/data-table/')
+};
 //
-// }
-//
-// map.on('click', onMapClick);
-//
-// var popup = L.popup();
-//
-// function onMapClick(e) {
-//     popup
-//         .setLatLng(e.latlng)
-//         .setContent("You clicked the map at " + e.latlng.toString())
-//         .openOn(mymap);
-//
-// }
-//
-// mymap.on('click', onMapClick);
+var inputRange = document.getElementById('cloud');
+var inputNumb = document.getElementById('num');
+inputRange.oninput = function (e) {
+    inputNumb.value = inputRange.value;
+
+};
+
+inputNumb.onchange = function (e) {
+    inputRange.value = inputNumb.value;
+
+};
+// Modal data-table
+$(document).ready(function () {
+    $('#sub').click(function () {
+        $('.pop-outer').fadeIn('slow');
+        $('.map').fadeOut('slow');
+        $('.geo-submit').fadeOut('slow');
+        $('.footer').fadeOut('slow');
+    });
+
+    $('.close').click(function () {
+        $('.pop-outer').fadeOut('slow');
+        $('.map').fadeIn('slow');
+        $('.geo-submit').fadeIn('slow');
+        $('.footer').fadeIn('slow');
+    })
+});
+
+$(document).ready(function () {
+    $('.map').click(function () {
+        $('.geo-submit').fadeOut('slow');
+    });
+});
+
+$(document).ready(function () {
+    $('.geo-submit').click(function () {
+        $('.map').fadeOut('slow');
+    })
+});
+// fixed date for finish
+$(function(){
+    let dtToday = new Date();
+
+    let month = dtToday.getMonth() + 1;
+    let day = dtToday.getDate();
+    let year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    let maxDate = year + '-' + month + '-' + day;
+
+    $('#finish').attr('max', maxDate);
+});
+//fixed date for start
+$(function(){
+    let dtToday = new Date();
+
+    let month = dtToday.getMonth() + 1;
+    let day = dtToday.getDate() - 3;
+    let year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    let maxDate = year + '-' + month + '-' + day;
+
+    $('#start').attr('max', maxDate);
+});
+

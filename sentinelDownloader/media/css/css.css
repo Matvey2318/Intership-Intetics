@@ -1,9 +1,60 @@
-#mapid {
-    height: 180px;
-    right: -740px;
-    top : -30px;
+.all-map {
+float:right;
+top: 0px;
 }
-#date{
-    top : 10px;
+.date{
+    display : flex;
+
+
+}
+.footer{
+    background-color: #222222;
+    width: 1366px;
+    height: 133px;
+    color: #0078A8;
+    margin-top: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#cld{
+    display: flex;
+    width:250px;
+}
+.main{
+    display:flex;
+    Justify-content: space-between;
 }
 
+.inputs{
+    display: block;
+}
+.geo-submit{
+    padding: 10px;
+}
+
+#submit{
+    padding: 60px;
+
+}
+.table-data{
+    display: none;
+}
+
+.pop-outer{
+            background-color: rgba(0,0,0,0.5);
+            position: fixed;
+            top: 0;
+            left : 0;
+            width : 100%;
+            height: 100%;
+        }
+        .pop-inner{
+            background-color: #fff;
+            height:300px;
+            padiing:25px;
+            /*margin: 15% auto;*/
+            width: 750px;
+            margin-left: 330px;
+
+        }
