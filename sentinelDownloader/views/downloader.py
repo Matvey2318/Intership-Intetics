@@ -5,6 +5,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from collections import OrderedDict
 from django.http import HttpResponse, HttpRequest
+from pprint import pprint
 import urllib.request
 import urllib.error
 
@@ -12,7 +13,7 @@ import urllib.error
 class DataProcessing:
     Data = dict()
     urls = []
-    geojson_obj = None
+    footprint = None
 
 
 user_data = DataProcessing()
@@ -28,10 +29,7 @@ def get_all_data(request): #geojson_obj):
             json_data = json.loads(json_data)
             data['date'] = (json_data['beginposition'].replace('-', ''), json_data['endposition'].replace('-', ''))
             data['cloudcoverpercentage'] = (0, int(json_data['cloudcoverpercentage']))
-            # data['footprint']='POLYGON ((34.322010 0.401648,36.540989 0.876987,36.884121 -0.747357,34.664474 -1.227940,34.322010 0.401648))'
-            # json_data = json.loads(json_data)
             user_data.Data = OrderedDict(data)
-            print(user_data.Data)
     return user_data.Data
 
 @csrf_exempt
@@ -40,6 +38,8 @@ def geojson_handler(request):
         polygon_data = json.loads(request.FILES.get('polygon_data').file.read().decode('UTF-8'))
         coordinates = polygon_data.get('features')[0]['geometry']['coordinates']
         if coordinates:
+            user_data.footprint = geojson_to_wkt(dict(polygon_data))
+            print(user_data.footprint)
             return HttpResponse('OK')
     return HttpResponse("Couldn't load data")
 
@@ -55,9 +55,8 @@ def find_urls(request, *geojson_obj):  # need to add conditional with geojson an
     """
     user_query = get_all_data(request)
     user_data.urls.clear()
-    footprint = 'POLYGON((34.322010 0.401648,36.540989 0.876987,36.884121 -0.747357,34.664474 -1.227940,34.322010 0.401648))'
     if api:
-        products = api.query(footprint, **user_query)
+        products = api.query(user_data.footprint, **user_query)
         product_ids = list(products)
         for id in product_ids:
             user_data.urls.append(api.get_product_odata(id)['url'])
