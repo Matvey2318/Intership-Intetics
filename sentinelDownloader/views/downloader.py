@@ -1,4 +1,4 @@
-from sentinelDownloader.views.account import Authorization
+# from sentinelDownloader.views.account import Authorization
 from sentinelsat import SentinelAPI, read_geojson, geojson_to_wkt
 from django.shortcuts import render, render_to_response
 import json
@@ -15,35 +15,8 @@ class DataProcessing:
     geojson_obj = None
 
 
-user_login = Authorization()  #user's instance of LogIn
 user_data = DataProcessing()
-
-
-def connect(request):
-    """
-    connecting to API
-    """
-    user_login.login(request)
-    try:
-        user_login.api = SentinelAPI(user_login.Login_data['login'], user_login.Login_data['password'],
-                                         'https://scihub.copernicus.eu/dhus')
-    except urllib.error.HTTPError as err:
-        if err.code == 403:
-            HttpResponse('Wrong login or password')
-    return
-
-
-def entrance(request):  # runs on index.html
-    connect(request)
-
-    """
-    returns form with map and forms
-    """
-    return render(
-        request,
-        'index.html',
-        context={}
-    )
+api = SentinelAPI('ella_ent', '--19--09--01', 'https://scihub.copernicus.eu/dhus')
 
 
 def get_all_data(request): #geojson_obj):
@@ -78,33 +51,20 @@ def find_urls(request, *geojson_obj):  # need to add conditional with geojson an
     :param request:
     JSON object with filters
     :return:
-    amount of urls
+    Response with urls
     """
     user_query = get_all_data(request)
     user_data.urls.clear()
     footprint = 'POLYGON((34.322010 0.401648,36.540989 0.876987,36.884121 -0.747357,34.664474 -1.227940,34.322010 0.401648))'
-    if user_login.api:
-        products = user_login.api.query(footprint, **user_query)
+    if api:
+        products = api.query(footprint, **user_query)
         product_ids = list(products)
         for id in product_ids:
-            user_data.urls.append(user_login.api.get_product_odata(id)['url'])
+            user_data.urls.append(api.get_product_odata(id)['url'])
         user_data.urls = set(user_data.urls)
         user_data.urls = list(user_data.urls)
         print('OK')
         # count = str(len(user_data.urls))
     else:
         HttpResponse('False')
-    return HttpResponse(json.dumps({'urls': user_data.urls}), content_type="application/json")   # need to return response
-
-
-def confirmation(request):
-    if request.GET:
-        return render(
-            request,
-            'download.html',  # here will be template with urls
-            context={'urls': user_data.urls}
-        )
-    else:
-        return render_to_response(
-            'index.html'
-        )
+    return HttpResponse(json.dumps({'urls': user_data.urls}), content_type="application/json")
