@@ -3,7 +3,6 @@ $('#reset_map').click(function () {
     mapModel.resetMap();
 });
 
-
 $('#get_geo').click(function(){
     console.log('GEO');
     $("#get_geo").prop("disabled", true);
@@ -21,7 +20,7 @@ $('#get_geo').click(function(){
         success: function (respond) {
             console.log('SUCCESS');
         }
-
+      
         });
 });
 
