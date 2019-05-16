@@ -3,28 +3,26 @@ $('#reset_map').click(function () {
     mapModel.resetMap();
 });
 
-$('#geojson').change(function () {
-    data = new FormData($('#geojson').get(0)); // .files
-});
 
-$('#get_geo').click(function () {
+$('#get_geo').click(function(){
     console.log('GEO');
     $("#get_geo").prop("disabled", true);
-
+    var fd = new FormData;
+    var $input = $('input[name="geojson"');
+    fd.append('polygon_data', $input.prop('files')[0]);
     $.ajax({
         url: 'home/get_geo',
         type: 'POST',
-
         cache: false,
-        //dataType: 'json',
         processData: false,
         contentType: false,
         enctype: 'multipart/form-data',
-        data: data, // stringify
+        data: fd,
         success: function (respond) {
             console.log('SUCCESS');
         }
-    })
+
+        });
 });
 
 let dict = {};
@@ -57,12 +55,17 @@ sub.onclick = function (e) {
 
 function Request() {
     $.ajax({
-        type: "GET",
-        url: 'home/findurls',
-        data: dict,
-        success: openDataTable,
-        dataType: "number",
-    });
+
+  type: "GET",
+  url: 'home/findurls',
+  data: dict,
+  success: openDataTable ,
+  dataType:"json",
+  success: function(data) {
+  console.log(data.urls);
+  }
+});
+
 }
 
 function openDataTable() {
