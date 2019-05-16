@@ -68,7 +68,7 @@ function Request() {
 function openDataTable() {
     myWin = open('http://127.0.0.1:8000/data-table/')
 };
-
+//
 var inputRange = document.getElementById('cloud');
 var inputNumb = document.getElementById('num');
 inputRange.oninput = function (e) {
@@ -80,7 +80,7 @@ inputNumb.onchange = function (e) {
     inputRange.value = inputNumb.value;
 
 };
-
+// Modal data-table
 $(document).ready(function () {
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
@@ -96,13 +96,17 @@ $(document).ready(function () {
         $('.footer').fadeIn('slow');
     })
 });
+
 $(document).ready(function () {
     $('.map').click(function () {
         $('.geo-submit').fadeOut('slow');
     });
 });
+
 $(document).ready(function () {
     $('.geo-submit').click(function () {
         $('.map').fadeOut('slow');
     })
 });
+
+
