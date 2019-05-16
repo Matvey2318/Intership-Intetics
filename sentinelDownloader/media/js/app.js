@@ -57,7 +57,7 @@ function Request() {
     $.ajax({
 
   type: "GET",
-  url: 'home/findurls',
+  url: 'findurls',
   data: dict,
   success: openDataTable ,
   dataType:"json",
