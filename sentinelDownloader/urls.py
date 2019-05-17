@@ -18,6 +18,8 @@ from django.urls import path
 from sentinelDownloader.views.downloader import find_urls, geojson_handler
 from django.views.generic import TemplateView
 from django.conf.urls import include, url
+from downloader import indexview
+from sentinelDownloader.views.registration import create_superuser
 from django.views.generic.base import RedirectView
 from django.contrib.auth import views as auth_views
 
@@ -25,7 +27,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('django.contrib.auth.urls')),
-    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('', indexview, name='home'),
+    # path('', TemplateView.as_view(template_name='index.html'), name='home'),
     path('get_geo', geojson_handler, name='geojson_handler'),
     path('data-table/', TemplateView.as_view(template_name="data_table.html"), name='data_table'),
     path('findurls', find_urls, name='home'),

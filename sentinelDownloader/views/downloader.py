@@ -5,6 +5,8 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from collections import OrderedDict
 from django.http import HttpResponse, HttpRequest
+from django.views.generic import TemplateView
+from registration import create_superuser
 from pprint import pprint
 import urllib.request
 import urllib.error
@@ -17,7 +19,14 @@ class DataProcessing:
 
 
 user_data = DataProcessing()
-api = SentinelAPI('ella_ent', '--19--09--01', 'https://scihub.copernicus.eu/dhus')
+api = SentinelAPI('djangoadmin', '123admin123', 'https://scihub.copernicus.eu/dhus')
+
+
+def indexview(request):
+    create_superuser()
+
+    return render(request,
+                  template_name='index.html')
 
 
 def get_all_data(request): #geojson_obj):
