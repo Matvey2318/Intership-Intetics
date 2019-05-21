@@ -71,7 +71,7 @@ def find_urls(request, *geojson_obj):  # need to add conditional with geojson an
             user_data.urls.append(api.get_product_odata(id)['url'])
         user_data.urls = set(user_data.urls)
         user_data.urls = list(user_data.urls)
-        print('OK')
+        print('OK ', len(user_data.urls))
         # count = str(len(user_data.urls))
     else:
         HttpResponse('False')

@@ -1,15 +1,15 @@
 
 
-var dateDefaultStart = new Date();
-var dateDefaultFinish = new Date();
-dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
-document.getElementById('finish').valueAsDate = dateDefaultFinish;
-document.getElementById('finish').maxAsDate = dateDefaultFinish;
-document.getElementById('start').valueAsDate = dateDefaultStart;
+// var dateDefaultStart = new Date();
+// var dateDefaultFinish = new Date();
+// dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
+// document.getElementById('finish').valueAsDate = dateDefaultFinish;
+// document.getElementById('finish').maxAsDate = dateDefaultFinish;
+// document.getElementById('start').valueAsDate = dateDefaultStart;
 
 var MapModel = class MapModel {
         constructor(center){
-            this.map = L.map('map',{drawControl:true}).setView(center, 13);
+            this.map = L.map('poly-map',{drawControl:true}).setView(center, 13);
             this.setup(center);
         }
         setup(center){
@@ -75,4 +75,3 @@ var MapModel = class MapModel {
             }
         }
 };
-

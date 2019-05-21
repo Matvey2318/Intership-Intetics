@@ -2,11 +2,6 @@
 float:right;
 top: 0px;
 }
-.date{
-    display : flex;
-
-
-}
 .footer{
     background-color: #222222;
     width: 100%;
@@ -17,24 +12,16 @@ top: 0px;
     bottom: 0;
     left: 0;
 }
-#cld{
-    display: flex;
-    width:250px;
-}
 .main{
     display:flex;
     Justify-content: space-between;
-}
-
-.inputs{
-    display: block;
 }
 .geo-submit{
     padding: 10px;
 }
 
 #submit{
-    padding: 60px;
+    padding: 20px;
 
 }
 .table-data{

@@ -20,7 +20,7 @@ $('#get_geo').click(function(){
         success: function (respond) {
             console.log('SUCCESS');
         }
-      
+
         });
 });
 
@@ -159,4 +159,3 @@ $(document).ready(function () {
         $('.geo-submit').removeClass("disabled");
     })
 });
-
