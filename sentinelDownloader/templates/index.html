@@ -8,6 +8,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="{% static "css/css.css" %}"/>
         <link rel="stylesheet" href="{% static "css/draw.css" %}"/>
         <link rel="shortcut icon" type="image/x-icon" href="{% static "images/sentinel.ico" %}"/>
@@ -124,10 +127,14 @@
         <div class="slider">
             <div class="Modern-Slider content-section" id="top">
                 <!-- Item -->
+
                 <div class="item item-1">
                     <div class="img-fill">
                     <div class="image"></div>
                     <div class="info">
+                    <div id="logout"><a href="{% url 'logout' %}" class="btn btn-info btn-lg" data-type="button" class="ms-layer">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></div>
                         <div>
                           <h1>Sentinel Eye</h1>
                           <p>The Copernicus Open Access Hub
@@ -143,13 +150,16 @@
                 <!-- Item -->
                 <div class="item item-2">
                     <div class="img-fill">
-                        <div class="image"></div>
+                        <div class="image">
+                        </div>
                         <div class="info">
+                        <div id="logout"><a href="{% url 'logout' %}" class="btn btn-info btn-lg" data-type="button" class="ms-layer">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></div>
                         <div>
-                          <h1>Lorem ipsum <br>dolor</h1>
-                          <p>Phasellus luctus odio eget dui imperdiet, at pulvinar ante convallis.
-                        <br>Proin sit amet fringilla erat.</p>
-
+                          <h1>Sentinel Eye</h1>
+                          <p>The Copernicus Open Access Hub
+                          			<a href="https://scihub.copernicus.eu/" target="_blank">website</a>.<br></p>
                           <div class="white-button button">
                               <a href="#featured">Discover More</a>
                           </div>
@@ -163,10 +173,13 @@
                     <div class="img-fill">
                         <div class="image"></div>
                         <div class="info">
+                    <div id="logout"><a href="{% url 'logout' %}" class="btn btn-info btn-lg" data-type="button" class="ms-layer">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></div>
                         <div>
-                          <h1>Suspendisse suscipit<br>nulla sed</h1>
-                          <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices <br>posuere cubilia Curae; Sed at massa turpis.</p>
-
+                          <h1>Sentinel Eye</h1>
+                          <p>The Copernicus Open Access Hub
+                          			<a href="https://scihub.copernicus.eu/" target="_blank">website</a>.<br></p>
                           <div class="white-button button">
                               <a href="#featured">Discover More</a>
                           </div>
@@ -209,7 +222,6 @@
                                     <label for="cloud-cover">Cloud Cover</label>
                                     <input type="range" value="0" min="0" max="100" id="cloud-cover" name="i_cloud_cover"/><span id="cloud-cover-value">0</span>                                  </div>
                               </div>
-                            </form>
                         </div>
                     </div>
                     <div class="row pull-left">
@@ -230,12 +242,9 @@
                     <div class="masonry">
                         <div class="row">
                           <form id="upload-container" method="POST">
-                            <img id="upload-image" src="{% static "img/upload.png" %}">
                             <div>
                               <input id="file-input" type="file" accept=".geojson" name="geojson">
                               <label for="file-input">Drop file</label>
-                              <span>or drug it here</span>
-
                               <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
                             </div>
                           </form>

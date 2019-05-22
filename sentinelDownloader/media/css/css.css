@@ -58,3 +58,8 @@ top: 0px;
 .map-disabled{
     opacity: 0;
 }
+
+#logout{
+position: relative;
+top: 20%;
+}

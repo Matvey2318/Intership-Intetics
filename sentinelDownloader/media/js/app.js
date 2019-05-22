@@ -8,7 +8,7 @@ $('#get_geo').click(function(){
     $("#get_geo").prop("disabled", true);
     var fd = new FormData;
     var $input = $('input[name="geojson"');
-    fd.append('polygon_data', $input.prop('files')[0]);
+    fd.append('geojson_data', $input.prop('files')[0]);
     $.ajax({
         url: 'get_geo',
         type: 'POST',
@@ -24,20 +24,20 @@ $('#get_geo').click(function(){
         });
 });
 
-//let dict = {};
-//let date_st = document.getElementById('start');
-//let date_fin = document.getElementById('finish');
-//let cloud = document.getElementById('cloud');
-//cloud.onchange = function (e) {
-//    dataRecord();
-//};
-//date_fin.onchange = function (e) {
-//    dataRecord();
-//};
-//
-//date_st.onchange = function (e) {
-//    dataRecord();
-//};
+let dict = {};
+let date_st = document.getElementById('from-date');
+let date_fin = document.getElementById('to-date-inclusive');
+let cloud = document.getElementById('cloud-cover');
+cloud.onchange = function (e) {
+    dataRecord();
+};
+date_fin.onchange = function (e) {
+    dataRecord();
+};
+
+date_st.onchange = function (e) {
+    dataRecord();
+};
 
 
 function dataRecord() {
