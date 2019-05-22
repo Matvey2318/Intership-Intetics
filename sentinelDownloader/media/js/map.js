@@ -59,6 +59,9 @@ var MapModel = class MapModel {
               }
               editableLayers.clearLayers();
               editableLayers.addLayer(layer);
+                var ltlng = e.layer._latlngs;
+                  console.log(ltlng[0]);
+
             });
         }
 
@@ -73,6 +76,12 @@ var MapModel = class MapModel {
                     }
                 }
             }
+        }
+
+        SendGeoJson(){
+            var myGeoJSON = {};
+                    myGeoJSON.type = "FeatureCollection";
+                    myGeoJSON.features = arr;
         }
 };
 

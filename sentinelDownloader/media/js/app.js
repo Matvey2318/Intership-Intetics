@@ -3,7 +3,7 @@ $('#reset_map').click(function () {
     mapModel.resetMap();
 });
 
-$('#get_geo').click(function(){
+$('#get_geo').click(function () {
     console.log('GEO');
     $("#get_geo").prop("disabled", true);
     var fd = new FormData;
@@ -20,8 +20,8 @@ $('#get_geo').click(function(){
         success: function (respond) {
             console.log('SUCCESS');
         }
-      
-        });
+
+    });
 });
 
 let dict = {};
@@ -55,15 +55,15 @@ sub.onclick = function (e) {
 function Request() {
     $.ajax({
 
-  type: "GET",
-  url: 'findurls',
-  data: dict,
-  success: openDataTable ,
-  dataType:"json",
-  success: function(data) {
-  console.log(data.urls);
-  }
-});
+        type: "GET",
+        url: 'findurls',
+        data: dict,
+        success: openDataTable,
+        dataType: "json",
+        success: function (data) {
+            console.log(data.urls);
+        }
+    });
 
 }
 
@@ -86,7 +86,7 @@ inputNumb.onchange = function (e) {
 $(document).ready(function () {
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
-       $('.map').fadeOut('slow');
+        $('.map').fadeOut('slow');
         //$('.geo-submit').fadeOut('slow');
         //$('.footer').fadeOut('slow');
     });
@@ -100,15 +100,15 @@ $(document).ready(function () {
 });
 
 // fixed date for finish
-$(function(){
+$(function () {
     let dtToday = new Date();
 
     let month = dtToday.getMonth() + 1;
     let day = dtToday.getDate();
     let year = dtToday.getFullYear();
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
 
     let maxDate = year + '-' + month + '-' + day;
@@ -116,15 +116,15 @@ $(function(){
     $('#finish').attr('max', maxDate);
 });
 //fixed date for start
-$(function(){
+$(function () {
     let dtToday = new Date();
 
     let month = dtToday.getMonth() + 1;
     let day = dtToday.getDate() - 3;
     let year = dtToday.getFullYear();
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
 
     let maxDate = year + '-' + month + '-' + day;
@@ -159,4 +159,3 @@ $(document).ready(function () {
         $('.geo-submit').removeClass("disabled");
     })
 });
-
