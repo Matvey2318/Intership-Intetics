@@ -113,5 +113,9 @@ jQuery(document).ready(function($) {
           $('html, body').animate({ scrollTop: $($(this).attr('href')).offset().top -0 }, 500, 'linear');
         });
 
+          $("[type=range]").on('input', function(){
+            $("#cloud-cover-value").text($(this).val());
+          });
+
 
 });
