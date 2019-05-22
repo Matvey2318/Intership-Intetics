@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#table_id').dataTable();
+   // $('#table_id').dataTable();
 } );
 
 function fillingDataTable(){
@@ -18,5 +18,5 @@ dataTb.innerHTML = `
                 <td>${str} Data 2</td>
                 <td>etc</td>
            `;
-table.appendChild(dataTb);
+//table.appendChild(dataTb);
 }

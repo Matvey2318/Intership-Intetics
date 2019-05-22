@@ -21,31 +21,30 @@ $('#get_geo').click(function () {
             console.log('SUCCESS');
         }
 
-    });
+
+        });
 });
 
-let dict = {};
-let date_st = document.getElementById('start');
-let date_fin = document.getElementById('finish');
-let cloud = document.getElementById('cloud');
-cloud.onchange = function (e) {
-    dataRecord();
-};
-date_fin.onchange = function (e) {
-    dataRecord();
-};
-
-date_st.onchange = function (e) {
-    dataRecord();
-};
+//let dict = {};
+//let date_st = document.getElementById('start');
+//let date_fin = document.getElementById('finish');
+//let cloud = document.getElementById('cloud');
+//cloud.onchange = function (e) {
+//    dataRecord();
+//};
+//date_fin.onchange = function (e) {
+//    dataRecord();
+//};
+//
+//date_st.onchange = function (e) {
+//    dataRecord();
+//};
 
 
 function dataRecord() {
-
     dict.beginposition = date_st.value;
     dict.endposition = date_fin.value;
     dict.cloudcoverpercentage = cloud.value;
-
 };
 let sub = document.getElementById('sub');
 sub.onclick = function (e) {
@@ -71,17 +70,17 @@ function openDataTable() {
     myWin = open('http://127.0.0.1:8000/data-table/')
 };
 //
-var inputRange = document.getElementById('cloud');
-var inputNumb = document.getElementById('num');
-inputRange.oninput = function (e) {
-    inputNumb.value = inputRange.value;
-
-};
-
-inputNumb.onchange = function (e) {
-    inputRange.value = inputNumb.value;
-
-};
+//var inputRange = document.getElementById('cloud');
+//var inputNumb = document.getElementById('num');
+//inputRange.oninput = function (e) {
+//    inputNumb.value = inputRange.value;
+//
+//};
+//
+//inputNumb.onchange = function (e) {
+//    inputRange.value = inputNumb.value;
+//
+//};
 // Modal data-table room for improvement
 $(document).ready(function () {
     $('#sub').click(function () {
@@ -159,3 +158,4 @@ $(document).ready(function () {
         $('.geo-submit').removeClass("disabled");
     })
 });
+
