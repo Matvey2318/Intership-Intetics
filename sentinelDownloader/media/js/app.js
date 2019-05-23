@@ -47,6 +47,7 @@ function dataRecord() {
 };
 let sub = document.getElementById('sub');
 sub.onclick = function (e) {
+    console.log('AAAAAAA');
     Request();
 };
 
@@ -111,7 +112,7 @@ $(function(){
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#finish').attr('max', maxDate);
+    $('#to-date-inclusive').attr('max', maxDate);
 });
 //fixed date for start
 $(function(){
@@ -127,7 +128,7 @@ $(function(){
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#start').attr('max', maxDate);
+    $('#from-date').attr('max', maxDate);
 });
 //disable submit
 $(document).ready(function () {
