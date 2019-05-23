@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
            // fade:true,
             draggable:false,
             prevArrow:'<button class="PrevArrow"></button>',
-            nextArrow:'<button class="NextArrow"></button>', 
+            nextArrow:'<button class="NextArrow"></button>',
           });
 
         $('#nav-toggle').on('click', function (event) {

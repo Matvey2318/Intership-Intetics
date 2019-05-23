@@ -44,7 +44,7 @@ def get_all_data(request): #geojson_obj):
 @csrf_exempt
 def geojson_handler(request):
     if request.is_ajax() and request.method == 'POST':
-        polygon_data = json.loads(request.FILES.get('polygon_data').file.read().decode('UTF-8'))
+        polygon_data = json.loads(request.FILES.get('geojson_data').file.read().decode('UTF-8'))
         coordinates = polygon_data.get('features')[0]['geometry']['coordinates']
         if coordinates:
             user_data.footprint = geojson_to_wkt(dict(polygon_data))

@@ -423,7 +423,7 @@ width: 90%;
   z-index:5;
 }
 
-.Modern-Slider .NextArrow:before{content:'\f105';}
+ .Modern-Slider .NextArrow:before{content:'\f105';}
 
 .Modern-Slider .PrevArrow{
   outline: none;
