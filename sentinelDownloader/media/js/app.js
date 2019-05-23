@@ -2,8 +2,8 @@ var mapModel = new MapModel([51.505, -0.09]);
 $('#reset_map').click(function () {
     mapModel.resetMap();
 });
-
-$('#get_geo').click(function(){
+console.log(mapModel.posit);
+$('#get_geo').click(function () {
     console.log('GEO');
     $("#get_geo").prop("disabled", true);
     var fd = new FormData;
@@ -21,23 +21,23 @@ $('#get_geo').click(function(){
             console.log('SUCCESS');
         }
 
-        });
+    });
 });
 
-//let dict = {};
-//let date_st = document.getElementById('start');
-//let date_fin = document.getElementById('finish');
-//let cloud = document.getElementById('cloud');
-//cloud.onchange = function (e) {
-//    dataRecord();
-//};
-//date_fin.onchange = function (e) {
-//    dataRecord();
-//};
-//
-//date_st.onchange = function (e) {
-//    dataRecord();
-//};
+let dict = {};
+let date_st = document.getElementById('from-date');
+let date_fin = document.getElementById('to-date-inclusive');
+let cloud = document.getElementById('cloud-cover');
+cloud.onchange = function (e) {
+    dataRecord();
+};
+date_fin.onchange = function (e) {
+    dataRecord();
+};
+
+date_st.onchange = function (e) {
+    dataRecord();
+};
 
 
 function dataRecord() {
@@ -52,22 +52,33 @@ sub.onclick = function (e) {
 
 function Request() {
     $.ajax({
+        type: "GET",
+        url: 'findurls',
+        data: dict,
+        dataType: "json",
+        success: function (data) {
+            // fillingDataTable(data.urls);
+            let table = document.getElementById('date');
+            let dataTb = document.createElement('tr');
+            let i = 1;
+            for (item of data.urls) {
+                let dataTb = document.createElement('tr');
+                dataTb.innerHTML = `
 
-  type: "GET",
-  url: 'findurls',
-  data: dict,
-  success: openDataTable ,
-  dataType:"json",
-  success: function(data) {
-  console.log(data.urls);
-  }
-});
+                <td><a href="${item}">${item}</a></td>
+                <td>${i}</td>
+               
+           `;
+                table.appendChild(dataTb);
+                i++;
+            }
+            $('.pop-outer').fadeIn('slow');
+            console.log(data.urls);
+        }
+    });
 
 }
 
-function openDataTable() {
-    myWin = open('http://127.0.0.1:8000/data-table/')
-};
 //
 //var inputRange = document.getElementById('cloud');
 //var inputNumb = document.getElementById('num');
@@ -84,7 +95,7 @@ function openDataTable() {
 $(document).ready(function () {
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
-       $('.map').fadeOut('slow');
+        $('.map').fadeOut('slow');
         //$('.geo-submit').fadeOut('slow');
         //$('.footer').fadeOut('slow');
     });
@@ -98,36 +109,36 @@ $(document).ready(function () {
 });
 
 // fixed date for finish
-$(function(){
+$(function () {
     let dtToday = new Date();
 
     let month = dtToday.getMonth() + 1;
     let day = dtToday.getDate();
     let year = dtToday.getFullYear();
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#finish').attr('max', maxDate);
+    $('#to-date-inclusive').attr('max', maxDate);
 });
 //fixed date for start
-$(function(){
+$(function () {
     let dtToday = new Date();
 
     let month = dtToday.getMonth() + 1;
     let day = dtToday.getDate() - 3;
     let year = dtToday.getFullYear();
-    if(month < 10)
+    if (month < 10)
         month = '0' + month.toString();
-    if(day < 10)
+    if (day < 10)
         day = '0' + day.toString();
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#start').attr('max', maxDate);
+    $('#from-date').attr('max', maxDate);
 });
 //disable submit
 $(document).ready(function () {
@@ -157,3 +168,9 @@ $(document).ready(function () {
         $('.geo-submit').removeClass("disabled");
     })
 });
+
+let dateDefaultStart = new Date();
+let dateDefaultFinish = new Date();
+dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
+document.getElementById('to-date-inclusive').valueAsDate = new Date();
+document.getElementById('from-date').valueAsDate = dateDefaultStart;
