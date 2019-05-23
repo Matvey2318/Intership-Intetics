@@ -45,6 +45,7 @@ function dataRecord() {
     dict.endposition = date_fin.value;
     dict.cloudcoverpercentage = cloud.value;
 };
+
 let sub = document.getElementById('sub');
 sub.onclick = function (e) {
     console.log('AAAAAAA');
@@ -83,6 +84,10 @@ function openDataTable() {
 //};
 // Modal data-table room for improvement
 $(document).ready(function () {
+       $('#map-dashboard-form').submit(function(e) {
+            e.preventDefault();
+        });
+
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
        $('.map').fadeOut('slow');

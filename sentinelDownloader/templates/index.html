@@ -206,7 +206,7 @@
                             <div id="poly-map"></div>
                         </div>
                         <div class="col-sm-3"  id="map-dashboard">
-                            <form>
+                            <form id="map-dashboard-form" action='post'>
                               <div class="form-row">
                                 <div class="col-md-10 mb-2">
                                   <label for="from-date">From</label>
@@ -222,13 +222,14 @@
                                     <label for="cloud-cover">Cloud Cover</label>
                                     <input type="range" value="0" min="0" max="100" id="cloud-cover" name="i_cloud_cover"/><span id="cloud-cover-value">0</span>                                  </div>
                               </div>
-                        </div>
-                    </div>
-                    <div class="row pull-left">
-                        <button style="top: -10px" class="btn btn-warning reset">Reset</button>
-                        <button class="cancel-map btn btn-secondary">Cancel</button>
-                        <input type="submit"  id="sub" value="Submit"><!--class="btn btn-primary"-->
-                    </div>
+                              </div>
+                                </div>
+                                <div class="row pull-left">
+                                    <button style="top: -10px" class="btn btn-warning reset">Reset</button>
+                                    <button class="cancel-map btn btn-secondary">Cancel</button>
+                                    <input type="submit"  id="sub" value="Submit"><!--class="btn btn-primary"-->
+                                </div>
+                            </form>
                 </div>
                 </div>
             </section>
