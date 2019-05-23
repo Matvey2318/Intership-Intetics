@@ -8,7 +8,7 @@ $('#get_geo').click(function () {
     $("#get_geo").prop("disabled", true);
     var fd = new FormData;
     var $input = $('input[name="geojson"');
-    fd.append('polygon_data', $input.prop('files')[0]);
+    fd.append('geojson_data', $input.prop('files')[0]);
     $.ajax({
         url: 'get_geo',
         type: 'POST',

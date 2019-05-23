@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
 <head>
     {% load static %}
     <meta charset="utf-8">
@@ -34,6 +35,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
     </script>
+=======
+    <head>
+        {% load static %}
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Sentinel Eye</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{% static "css/css.css" %}"/>
+        <link rel="stylesheet" href="{% static "css/draw.css" %}"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{% static "images/sentinel.ico" %}"/>
+
+        <!--<link rel="stylesheet" href="css/draw.css"/>-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+              integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+              crossorigin=""/>
+        <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">-->
+<!--        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+        <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                crossorigin="anonymous"></script>-->
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+                integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+                crossorigin=""></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+
+         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+
+>>>>>>> e83edc0dafb8ef214e74b7e272ba5063f4a89cec
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -80,6 +120,7 @@
         </div>
 
 
+<<<<<<< HEAD
         <nav>
             <ul>
                 <li>
@@ -126,8 +167,19 @@
             <!-- Item -->
             <div class="item item-1">
                 <div class="img-fill">
+=======
+        <div class="slider">
+            <div class="Modern-Slider content-section" id="top">
+                <!-- Item -->
+
+                <div class="item item-1">
+                    <div class="img-fill">
+>>>>>>> e83edc0dafb8ef214e74b7e272ba5063f4a89cec
                     <div class="image"></div>
                     <div class="info">
+                    <div id="logout"><a href="{% url 'logout' %}" class="btn btn-info btn-lg" data-type="button" class="ms-layer">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></div>
                         <div>
                             <h1>Sentinel Eye</h1>
                             <p>The Copernicus Open Access Hub
@@ -138,6 +190,7 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
             </div>
             <!-- // Item -->
             <!-- Item -->
@@ -171,6 +224,46 @@
                             <div class="white-button button">
                                 <a href="#featured">Discover More</a>
                             </div>
+=======
+                <!-- // Item -->
+                <!-- Item -->
+                <div class="item item-2">
+                    <div class="img-fill">
+                        <div class="image">
+                        </div>
+                        <div class="info">
+                        <div id="logout"><a href="{% url 'logout' %}" class="btn btn-info btn-lg" data-type="button" class="ms-layer">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></div>
+                        <div>
+                          <h1>Sentinel Eye</h1>
+                          <p>The Copernicus Open Access Hub
+                          			<a href="https://scihub.copernicus.eu/" target="_blank">website</a>.<br></p>
+                          <div class="white-button button">
+                              <a href="#featured">Discover More</a>
+                          </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- // Item -->
+                <!-- Item -->
+                <div class="item item-3">
+                    <div class="img-fill">
+                        <div class="image"></div>
+                        <div class="info">
+                    <div id="logout"><a href="{% url 'logout' %}" class="btn btn-info btn-lg" data-type="button" class="ms-layer">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a></div>
+                        <div>
+                          <h1>Sentinel Eye</h1>
+                          <p>The Copernicus Open Access Hub
+                          			<a href="https://scihub.copernicus.eu/" target="_blank">website</a>.<br></p>
+                          <div class="white-button button">
+                              <a href="#featured">Discover More</a>
+                          </div>
+                        </div>
+>>>>>>> e83edc0dafb8ef214e74b7e272ba5063f4a89cec
                         </div>
                     </div>
                 </div>
@@ -211,7 +304,16 @@
                                         <input type="range" value="0" min="0" max="100" id="cloud-cover"
                                                name="i_cloud_cover"/><span id="cloud-cover-value">0</span></div>
                                 </div>
+<<<<<<< HEAD
                             </form>
+=======
+                              </div>
+                              <div class="form-row">
+                                  <div class="col-md-10 mb-2">
+                                    <label for="cloud-cover">Cloud Cover</label>
+                                    <input type="range" value="0" min="0" max="100" id="cloud-cover" name="i_cloud_cover"/><span id="cloud-cover-value">0</span>                                  </div>
+                              </div>
+>>>>>>> e83edc0dafb8ef214e74b7e272ba5063f4a89cec
                         </div>
                     </div>
                     <div class="row pull-left">
@@ -227,6 +329,7 @@
                 <h1>Recent<br><em>Projects</em></h1>
                 <p>Praesent pellentesque efficitur magna,
                     <br>sed pellentesque neque malesuada vitae.</p>
+<<<<<<< HEAD
             </div>
             <div class="section-content">
                 <div class="masonry">
@@ -239,6 +342,17 @@
                                 <span>or drug it here</span>
 
                                 <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
+=======
+                </div>
+                <div class="section-content">
+                    <div class="masonry">
+                        <div class="row">
+                          <form id="upload-container" method="POST">
+                            <div>
+                              <input id="file-input" type="file" accept=".geojson" name="geojson">
+                              <label for="file-input">Drop file</label>
+                              <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
+>>>>>>> e83edc0dafb8ef214e74b7e272ba5063f4a89cec
                             </div>
                         </form>
                     </div>
