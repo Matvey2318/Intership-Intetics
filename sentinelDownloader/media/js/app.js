@@ -2,7 +2,6 @@ var mapModel = new MapModel([51.505, -0.09]);
 $('#reset_map').click(function () {
     mapModel.resetMap();
 });
-console.log(mapModel.posit);
 $('#get_geo').click(function () {
     console.log('GEO');
     $("#get_geo").prop("disabled", true);

@@ -52,7 +52,6 @@ var MapModel = class MapModel {
               editableLayers.addLayer(layer);
               var ltlng = e.layer._latlngs;
                   console.log(ltlng[0]);
-                  this.posit = ltlng;
             });
         }
 
