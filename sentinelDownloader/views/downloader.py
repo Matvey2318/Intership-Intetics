@@ -7,7 +7,7 @@ from collections import OrderedDict
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import TemplateView
 from registration import create_superuser
-from pprint import pprint
+from shapely.geometry import shape
 import urllib.request
 import urllib.error
 
@@ -51,6 +51,23 @@ def geojson_handler(request):
             print(user_data.footprint)
             return HttpResponse('OK')
     return HttpResponse("Couldn't load data")
+
+
+def map_handler(request):
+    if request.is_ajax() and request.method == 'GET':
+        coordinates = dict(request.GET)['coordinates']
+        for i in range(len(coordinates)):
+            coordinates[i] = list(coordinates[i])
+        new_arr = list()
+        new_arr.append(coordinates[:])
+        geo = {
+            "coordinates": new_arr,
+            "type": "Polygon"
+        }
+        geom = shape(geo)
+        user_data.footprint = geom.wkt
+        HttpResponse('OK')
+    HttpResponse("Couldn't load data")
 
 
 def find_urls(request, *geojson_obj):  # need to add conditional with geojson and footprint
