@@ -1,17 +1,22 @@
-let table = document.getElementById('date');
- let dataTb = document.createElement('tr');
-//function fillingDataTable(arr) {
-//      arr=[1,2,3,4,5,6];
-    for (item of arr) {
-        let dataTb = document.createElement('tr');
-        dataTb.innerHTML = `
+$(document).ready(function() {
+   // $('#table_id').dataTable();
+} );
 
-                <td><a href="${item}">${item}</a></td>
-                <td>ID</td>
-               
+function fillingDataTable(){
+
+}
+let str;
+let dataTb= document.createElement('tr');
+let table = document.getElementById('date');
+let arr=[1,2,3,4,5,6,7,8,9];
+for (item of arr){
+    let dataTb= document.createElement('tr');
+    str = `Row${item}`;
+dataTb.innerHTML = `
+
+                <td>${str} Data 1</td>
+                <td>${str} Data 2</td>
+                <td>etc</td>
            `;
-        table.appendChild(dataTb);
-    }
-    // $('.pop-outer').fadeIn('slow');
-    //myWin = open('http://127.0.0.1:8000/data-table/')
-//};
+//table.appendChild(dataTb);
+}

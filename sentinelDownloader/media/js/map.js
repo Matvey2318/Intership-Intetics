@@ -1,3 +1,12 @@
+
+
+// var dateDefaultStart = new Date();
+// var dateDefaultFinish = new Date();
+// dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
+// document.getElementById('finish').valueAsDate = dateDefaultFinish;
+// document.getElementById('finish').maxAsDate = dateDefaultFinish;
+// document.getElementById('start').valueAsDate = dateDefaultStart;
+
 var MapModel = class MapModel {
         constructor(center){
             this.map = L.map('poly-map',{drawControl:true}).setView(center, 13);
@@ -50,8 +59,6 @@ var MapModel = class MapModel {
               }
               editableLayers.clearLayers();
               editableLayers.addLayer(layer);
-              var ltlng = e.layer._latlngs;
-                  console.log(ltlng[0]);
             });
         }
 

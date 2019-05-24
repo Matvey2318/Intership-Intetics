@@ -2,7 +2,8 @@ var mapModel = new MapModel([51.505, -0.09]);
 $('#reset_map').click(function () {
     mapModel.resetMap();
 });
-$('#get_geo').click(function () {
+
+$('#get_geo').click(function(){
     console.log('GEO');
     $("#get_geo").prop("disabled", true);
     var fd = new FormData;
@@ -20,7 +21,7 @@ $('#get_geo').click(function () {
             console.log('SUCCESS');
         }
 
-    });
+        });
 });
 
 let dict = {};
@@ -51,33 +52,22 @@ sub.onclick = function (e) {
 
 function Request() {
     $.ajax({
-        type: "GET",
-        url: 'findurls',
-        data: dict,
-        dataType: "json",
-        success: function (data) {
-            // fillingDataTable(data.urls);
-            let table = document.getElementById('date');
-            let dataTb = document.createElement('tr');
-            let i = 1;
-            for (item of data.urls) {
-                let dataTb = document.createElement('tr');
-                dataTb.innerHTML = `
 
-                <td><a href="${item}">${item}</a></td>
-                <td>${i}</td>
-               
-           `;
-                table.appendChild(dataTb);
-                i++;
-            }
-            $('.pop-outer').fadeIn('slow');
-            console.log(data.urls);
-        }
-    });
+  type: "GET",
+  url: 'findurls',
+  data: dict,
+  success: openDataTable ,
+  dataType:"json",
+  success: function(data) {
+  console.log(data.urls);
+  }
+});
 
 }
 
+function openDataTable() {
+    myWin = open('http://127.0.0.1:8000/data-table/')
+};
 //
 //var inputRange = document.getElementById('cloud');
 //var inputNumb = document.getElementById('num');
@@ -94,7 +84,7 @@ function Request() {
 $(document).ready(function () {
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
-        $('.map').fadeOut('slow');
+       $('.map').fadeOut('slow');
         //$('.geo-submit').fadeOut('slow');
         //$('.footer').fadeOut('slow');
     });
@@ -108,36 +98,36 @@ $(document).ready(function () {
 });
 
 // fixed date for finish
-$(function () {
+$(function(){
     let dtToday = new Date();
 
     let month = dtToday.getMonth() + 1;
     let day = dtToday.getDate();
     let year = dtToday.getFullYear();
-    if (month < 10)
+    if(month < 10)
         month = '0' + month.toString();
-    if (day < 10)
+    if(day < 10)
         day = '0' + day.toString();
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#to-date-inclusive').attr('max', maxDate);
+    $('#finish').attr('max', maxDate);
 });
 //fixed date for start
-$(function () {
+$(function(){
     let dtToday = new Date();
 
     let month = dtToday.getMonth() + 1;
     let day = dtToday.getDate() - 3;
     let year = dtToday.getFullYear();
-    if (month < 10)
+    if(month < 10)
         month = '0' + month.toString();
-    if (day < 10)
+    if(day < 10)
         day = '0' + day.toString();
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#from-date').attr('max', maxDate);
+    $('#start').attr('max', maxDate);
 });
 //disable submit
 $(document).ready(function () {
@@ -167,9 +157,3 @@ $(document).ready(function () {
         $('.geo-submit').removeClass("disabled");
     })
 });
-
-let dateDefaultStart = new Date();
-let dateDefaultFinish = new Date();
-dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
-document.getElementById('to-date-inclusive').valueAsDate = new Date();
-document.getElementById('from-date').valueAsDate = dateDefaultStart;
