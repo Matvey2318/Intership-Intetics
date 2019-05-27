@@ -1,9 +1,11 @@
 var MapModel = class MapModel {
         constructor(center){
             this.map = L.map('poly-map',{drawControl:true}).setView(center, 13);
+            this.latLng = null;
             this.setup(center);
         }
         setup(center){
+            let mapModel = this;
             // Set up the OSM layer
             L.tileLayer(
               'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,9 +52,12 @@ var MapModel = class MapModel {
               }
               editableLayers.clearLayers();
               editableLayers.addLayer(layer);
-              var ltlng = e.layer._latlngs;
-                  console.log(ltlng[0]);
+              mapModel.latLng = e.layer._latlngs[0];
+                console.log(mapModel.getLatLng());
             });
+        }
+        getLatLng(){
+            return this.latLng;
         }
 
         resetMap(){
