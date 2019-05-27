@@ -10,7 +10,7 @@ $('#get_geo').click(function(){
     var $input = $('input[name="geojson"');
     fd.append('geojson_data', $input.prop('files')[0]);
     $.ajax({
-        url: 'get_geo',
+        url: 'home/get_geo',
         type: 'POST',
         cache: false,
         processData: false,
@@ -48,7 +48,6 @@ function dataRecord() {
 
 let sub = document.getElementById('sub');
 sub.onclick = function (e) {
-    console.log('AAAAAAA');
     Request();
 };
 
@@ -56,7 +55,7 @@ function Request() {
     $.ajax({
 
   type: "GET",
-  url: 'findurls',
+  url: 'home/findurls',
   data: dict,
   success: openDataTable ,
   dataType:"json",
