@@ -68,7 +68,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="#top">Home</a></li>
                         <li><a href="#draw-map">Map</a></li>
-                        <li><a href="#upload-geojson">Upload File</a></li>
+                        <!--<li><a href="#upload-geojson">Upload File</a></li>-->
                         <li><a href="#about">About Project</a></li>
                     </ul>
                 </nav>
@@ -99,15 +99,15 @@
                             Map
                         </a>
                     </li>
-                    <li>
+                    <!--<li>
                         <a href="#upload-geojson">
                             <span class="rect"></span>
                             <span class="circle"></span>
                             Upload File
                         </a>
-                    </li>
+                    </li>-->
                     <li>
-                        <a href="#about">
+                        <a href="#about-project">
                             <span class="rect"></span>
                             <span class="circle"></span>
                             About Project
@@ -199,14 +199,15 @@
                     <p>Download photos that
                     <br>contain selected area.</p>
                 </div>
-                <div class="section-content">
+                <div class="section-content" id="filters">
                 <div class="container">
                     <div class="row" style="">
                         <div class="col-sm-9">
                             <div id="poly-map"></div>
                         </div>
-                        <div class="col-sm-3"  id="map-dashboard">
-                            <form>
+                        <div class="col-sm-3">
+                        <div class="col-sm-12"  id="map-dashboard">
+                            <form id="map-dashboard-form" action='post'>
                               <div class="form-row">
                                 <div class="col-md-10 mb-2">
                                   <label for="from-date">From</label>
@@ -223,34 +224,30 @@
                                     <input type="range" value="0" min="0" max="100" id="cloud-cover" name="i_cloud_cover"/><span id="cloud-cover-value">0</span>                                  </div>
                               </div>
                         </div>
-                    </div>
-                    <div class="row pull-left">
-                        <button style="top: -10px" class="btn btn-warning reset">Reset</button>
-                        <button class="cancel-map btn btn-secondary">Cancel</button>
-                        <input type="submit" class="btn btn-primary" id="sub" value="Submit">
-                    </div>
-                </div>
-                </div>
-            </section>
-            <section id="upload-geojson" class="content-section">
-                <div class="section-heading">
-                    <h1>Recent<br><em>Projects</em></h1>
-                    <p>Praesent pellentesque efficitur magna,
-                    <br>sed pellentesque neque malesuada vitae.</p>
-                </div>
-                <div class="section-content">
-                    <div class="masonry">
-                        <div class="row">
-                          <form id="upload-container" method="POST">
-                            <div>
-                              <input id="file-input" type="file" accept=".geojson" name="geojson">
-                              <label for="file-input">Drop file</label>
-                              <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
-                            </div>
-                          </form>
+
+                        <div class="col-sm-12">
+                                <div class="row">
+                                  <form id="upload-container" method="POST">
+                                    <div>
+                                      <input id="file-input" type="file" accept=".geojson" name="geojson">
+                                      <label for="file-input">Drop file</label>
+                                      <input type="submit" class="btn btn-primary get_geo" id="get_geo" value="Sent">
+                                    </div>
+                                  </form>
+                                </div>
+                                <script src="{% static "js/map.js" %}"></script>
                         </div>
+                        </div>
+
+
                     </div>
-<script src="{% static "js/map.js" %}"></script>
+                                <div class="row pull-left">
+                                    <button style="top: -10px" class="btn btn-warning reset">Reset</button>
+                                    <button class="cancel-map btn btn-secondary">Cancel</button>
+                                    <input type="submit"  id="sub" value="Submit"><!--class="btn btn-primary"-->
+                                </div>
+                            </form>
+                </div>
                 </div>
             </section>
 

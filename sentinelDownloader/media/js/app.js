@@ -45,8 +45,10 @@ function dataRecord() {
     dict.endposition = date_fin.value;
     dict.cloudcoverpercentage = cloud.value;
 };
+
 let sub = document.getElementById('sub');
 sub.onclick = function (e) {
+    console.log('AAAAAAA');
     Request();
 };
 
@@ -82,6 +84,10 @@ function openDataTable() {
 //};
 // Modal data-table room for improvement
 $(document).ready(function () {
+       $('#map-dashboard-form').submit(function(e) {
+            e.preventDefault();
+        });
+
     $('#sub').click(function () {
         $('.pop-outer').fadeIn('slow');
        $('.map').fadeOut('slow');
@@ -111,7 +117,7 @@ $(function(){
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#finish').attr('max', maxDate);
+    $('#to-date-inclusive').attr('max', maxDate);
 });
 //fixed date for start
 $(function(){
@@ -127,7 +133,7 @@ $(function(){
 
     let maxDate = year + '-' + month + '-' + day;
 
-    $('#start').attr('max', maxDate);
+    $('#from-date').attr('max', maxDate);
 });
 //disable submit
 $(document).ready(function () {

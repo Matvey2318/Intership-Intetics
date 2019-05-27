@@ -61,5 +61,14 @@ top: 0px;
 
 #logout{
 position: relative;
-top: 20%;
+top: 15%;
+}
+
+.column {
+display: flex;
+flex-direction: column;
+}
+
+#filters{
+margin: 11% 0;
 }
