@@ -2,7 +2,16 @@ var mapModel = new MapModel([51.505, -0.09]);
 $('#reset_map').click(function () {
     mapModel.resetMap();
 });
-
+function fyjfkuyg ()
+{
+    if (mapModel.latLng.length > 4) {
+        let array = [];
+        for (let i = 0; i < mapModel.latLng.length; i++) {
+            array.push(mapModel.latLng[i].lat);
+            console.log(array);
+        }
+    }
+}
 $('#get_geo').click(function(){
     console.log('GEO');
     $("#get_geo").prop("disabled", true);
@@ -49,7 +58,39 @@ function dataRecord() {
 let sub = document.getElementById('sub');
 sub.onclick = function (e) {
     Request();
+     mapRequest();
 };
+
+function mapRequest(){
+    $.ajax({
+
+  type: "GET",
+  url: 'get_map',
+  data: mapModel.array,
+  dataType:"json",
+  success: function(data) {
+  let table = document.getElementById('date');
+            let dataTb = document.createElement('tr');
+            let i = 1;
+            for (item of data.urls) {
+                let dataTb = document.createElement('tr');
+                dataTb.innerHTML = `
+
+                <td><a href="${item}">${item}</a></td>
+                <td>${i}</td>
+               
+           `;
+                table.appendChild(dataTb);
+                i++;
+            }
+            $('.pop-outer').fadeIn('slow');
+            console.log(data.urls);
+            //console.log(mapModel.latLng);
+        }
+});
+
+
+}
 
 function Request() {
     $.ajax({
@@ -57,30 +98,30 @@ function Request() {
   type: "GET",
   url: 'findurls',
   data: dict,
-  success: openDataTable ,
   dataType:"json",
   success: function(data) {
-  console.log(data.urls);
-  }
+  let table = document.getElementById('date');
+            let dataTb = document.createElement('tr');
+            let i = 1;
+            for (item of data.urls) {
+                let dataTb = document.createElement('tr');
+                dataTb.innerHTML = `
+
+                <td><a href="${item}">${item}</a></td>
+                <td>${i}</td>
+               
+           `;
+                table.appendChild(dataTb);
+                i++;
+            }
+            $('.pop-outer').fadeIn('slow');
+            console.log(data.urls);
+            //console.log(mapModel.latLng);
+        }
 });
 
 }
 
-function openDataTable() {
-    myWin = open('http://127.0.0.1:8000/data-table/')
-};
-//
-//var inputRange = document.getElementById('cloud');
-//var inputNumb = document.getElementById('num');
-//inputRange.oninput = function (e) {
-//    inputNumb.value = inputRange.value;
-//
-//};
-//
-//inputNumb.onchange = function (e) {
-//    inputRange.value = inputNumb.value;
-//
-//};
 // Modal data-table room for improvement
 $(document).ready(function () {
        $('#map-dashboard-form').submit(function(e) {
@@ -162,3 +203,9 @@ $(document).ready(function () {
         $('.geo-submit').removeClass("disabled");
     })
 });
+
+let dateDefaultStart = new Date();
+let dateDefaultFinish = new Date();
+dateDefaultStart.setDate(dateDefaultStart.getDate() - 3);
+document.getElementById('to-date-inclusive').valueAsDate = new Date();
+document.getElementById('from-date').valueAsDate = dateDefaultStart;
